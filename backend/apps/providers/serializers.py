@@ -2,8 +2,8 @@ from rest_framework import serializers
 from apps.providers.models import Provider, ProviderPromotion
 
 class ProviderSerializer(serializers.ModelSerializer):
-    is_sponsored = serializers.SerializerMethodSerializer()
-    promotion_label = serializers.SerializerMethodSerializer()
+    is_sponsored = serializers.SerializerMethodField()
+    promotion_label = serializers.SerializerMethodField()
 
     class Meta:
         model = Provider

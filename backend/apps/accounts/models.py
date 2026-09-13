@@ -53,8 +53,8 @@ class User(AbstractBaseUser, PermissionsMixin, BaseModel):
     date_of_birth = models.DateField(null=True, blank=True)
     gender = models.CharField(max_length=20, choices=GENDER_CHOICES, default='PREFER_NOT_TO_SAY')
     profile_photo = models.CharField(max_length=500, blank=True, null=True)
-    
-    roles = models.JSONField(default=list, help_style="List of user roles e.g. ['PATIENT', 'FAMILY_MEMBER']")
+
+    roles = models.JSONField(default=list, help_text="List of user roles e.g. ['PATIENT', 'FAMILY_MEMBER']")
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)

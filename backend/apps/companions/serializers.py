@@ -10,7 +10,7 @@ class CompanionQualificationSerializer(serializers.ModelSerializer):
 
 class CompanionProfileSerializer(serializers.ModelSerializer):
     user_details = UserSerializer(source='user', read_only=True)
-    verified_qualifications = serializers.SerializerMethodSerializer()
+    verified_qualifications = serializers.SerializerMethodField()
 
     class Meta:
         model = CompanionProfile

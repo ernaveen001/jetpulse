@@ -2,7 +2,7 @@ from rest_framework import serializers
 from apps.health_records.models import HealthDocument
 
 class HealthDocumentSerializer(serializers.ModelSerializer):
-    signed_download_url = serializers.SerializerMethodSerializer()
+    signed_download_url = serializers.SerializerMethodField()
 
     class Meta:
         model = HealthDocument
