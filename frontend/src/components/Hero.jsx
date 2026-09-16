@@ -248,7 +248,10 @@ export default function Hero({ onOpenBooking, onNavigateNavigator }) {
                   key={imgKey}
                   src={slide.image}
                   alt={`${slide.tag}: ${slide.title}`}
-                  loading="lazy"
+                  loading={currentSlide === 0 ? 'eager' : 'lazy'}
+                  fetchPriority={currentSlide === 0 ? 'high' : 'auto'}
+                  width="640"
+                  height="280"
                   className="hero-slide-img"
                   style={{
                     width: '100%',

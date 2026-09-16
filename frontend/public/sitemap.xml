@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://www.jetpulse.in/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://www.jetpulse.in/healthcare-companion</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.jetpulse.in/hospital-navigation</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.jetpulse.in/diagnostic-test-assistance</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.jetpulse.in/post-discharge-care</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.jetpulse.in/care-navigator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.jetpulse.in/family-health-management</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.jetpulse.in/cities/bangalore</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.jetpulse.in/cities/varanasi</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.jetpulse.in/cities/jaipur</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.jetpulse.in/about</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://www.jetpulse.in/help</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://www.jetpulse.in/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://www.jetpulse.in/terms</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://www.jetpulse.in/verification</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://www.jetpulse.in/accessibility</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+</urlset>

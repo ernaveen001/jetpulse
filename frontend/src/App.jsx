@@ -1,10 +1,11 @@
-import React, { useState, Suspense, lazy } from 'react';
+import React, { useEffect, useState, Suspense, lazy } from 'react';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import TrustStrip from './components/TrustStrip';
 import CoreEnginesSection from './components/CoreEnginesSection';
 import HealthcareJourney from './components/HealthcareJourney';
 import Footer from './components/Footer';
+import PublicSeoPage, { isPublicSeoPath } from './components/PublicSeoPage';
 
 // Lazy-load heavy components — they only load when needed
 const CompanionBookingModal = lazy(() => import('./components/CompanionBookingModal'));
@@ -41,14 +42,47 @@ function SectionLoader() {
 export default function App() {
   const [currentView, setCurrentView] = useState('landing'); // 'landing' | 'app'
   const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [pathname, setPathname] = useState(window.location.pathname);
+
+  useEffect(() => {
+    const handlePopState = () => setPathname(window.location.pathname);
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   const handleOpenBooking = () => setIsBookingOpen(true);
   const handleCloseBooking = () => setIsBookingOpen(false);
+
+  const navigateToHome = () => {
+    window.history.pushState({}, '', '/');
+    setPathname('/');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const handleNavigateNavigator = () => {
     const el = document.getElementById('navigator');
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
+
+  if (isPublicSeoPath(pathname)) {
+    return (
+      <>
+        <PublicSeoPage
+          pathname={pathname}
+          onOpenBooking={handleOpenBooking}
+          onNavigateHome={navigateToHome}
+        />
+        {isBookingOpen && (
+          <Suspense fallback={null}>
+            <CompanionBookingModal
+              isOpen={isBookingOpen}
+              onClose={handleCloseBooking}
+            />
+          </Suspense>
+        )}
+      </>
+    );
+  }
 
   if (currentView === 'app') {
     return (

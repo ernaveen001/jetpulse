@@ -217,6 +217,126 @@ a {
   line-height: 1.6;
 }
 
+/* Public SEO pages */
+.seo-page-shell {
+  min-height: 100vh;
+  background: linear-gradient(180deg, var(--mint-soft) 0%, var(--bg-page) 42%);
+}
+
+.seo-page-header {
+  background: rgba(255, 255, 255, 0.94);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.seo-page-header-inner {
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.seo-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  background: transparent;
+  color: var(--navy);
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.seo-page-main {
+  padding: 96px 0 120px;
+}
+
+.seo-page-content {
+  max-width: 860px;
+}
+
+.seo-page-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--teal-dark);
+  font-size: 14px;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.seo-page-content h1 {
+  max-width: 780px;
+  font-size: clamp(38px, 6vw, 68px);
+  margin-bottom: 24px;
+}
+
+.seo-page-intro {
+  max-width: 720px;
+  color: var(--text-secondary);
+  font-size: 20px;
+  line-height: 1.7;
+  margin-bottom: 48px;
+}
+
+.seo-page-section {
+  max-width: 720px;
+  padding: 28px 0;
+  border-top: 1px solid var(--border-color);
+  margin-bottom: 28px;
+}
+
+.seo-page-section h2 {
+  font-size: 26px;
+  margin-bottom: 18px;
+}
+
+.seo-page-section p {
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+.seo-page-list {
+  list-style: none;
+  display: grid;
+  gap: 14px;
+}
+
+.seo-page-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.seo-page-list svg {
+  color: var(--teal-primary);
+  flex: 0 0 auto;
+  margin-top: 3px;
+}
+
+.seo-page-cities {
+  margin-top: 56px;
+}
+
+.seo-page-city-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.seo-page-city-links a {
+  color: var(--teal-dark);
+  border-bottom: 1px solid currentColor;
+  font-weight: 700;
+}
+
 /* ============================================
    BUTTONS
    ============================================ */

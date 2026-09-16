@@ -3,27 +3,30 @@ import { ShieldCheck, ExternalLink } from 'lucide-react';
 import JetPulseLogo from './JetPulseLogo';
 
 const PRODUCT_LINKS = [
-  { label: 'JetPulse Companion',        href: '#services' },
-  { label: 'Care Navigator AI',          href: '#navigator' },
-  { label: 'Family Health Ecosystem',    href: '#family-health' },
+  { label: 'JetPulse Companion',        href: '/healthcare-companion' },
+  { label: 'Care Navigator AI',         href: '/care-navigator' },
+  { label: 'Family Health Ecosystem',    href: '/family-health-management' },
+  { label: 'Hospital Navigation',       href: '/hospital-navigation' },
+  { label: 'Diagnostic Assistance',     href: '/diagnostic-test-assistance' },
+  { label: 'Post-Discharge Support',    href: '/post-discharge-care' },
   { label: 'Healthcare Network',         href: '#network' },
   { label: 'How It Works',              href: '#how-it-works' },
 ];
 
 const LEGAL_LINKS = [
-  { label: 'Help Center',               href: '#help', comingSoon: true },
-  { label: 'Privacy Policy',            href: '#privacy', comingSoon: true },
-  { label: 'Terms of Service',          href: '#terms', comingSoon: true },
-  { label: 'Companion Verification',    href: '#verification', comingSoon: true },
-  { label: 'Accessibility Standard',    href: '#accessibility', comingSoon: true },
+  { label: 'About JetPulse',            href: '/about' },
+  { label: 'Help Center',               href: '/help' },
+  { label: 'Privacy Policy',            href: '/privacy' },
+  { label: 'Terms of Service',          href: '/terms' },
+  { label: 'Companion Verification',    href: '/verification' },
+  { label: 'Accessibility Standard',    href: '/accessibility' },
 ];
 
-function FooterLink({ href, label, comingSoon }) {
+function FooterLink({ href, label }) {
   return (
     <li>
       <a
-        href={comingSoon ? undefined : href}
-        onClick={comingSoon ? (e) => e.preventDefault() : undefined}
+        href={href}
         style={{
           color: '#A0B2C6',
           fontSize: '14px',
@@ -31,16 +34,13 @@ function FooterLink({ href, label, comingSoon }) {
           alignItems: 'center',
           gap: '4px',
           transition: 'color 0.2s ease',
-          cursor: comingSoon ? 'not-allowed' : 'pointer',
-          opacity: comingSoon ? 0.7 : 1,
+          cursor: 'pointer',
         }}
-        onMouseEnter={(e) => !comingSoon && (e.currentTarget.style.color = 'var(--teal-bright)')}
+        onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--teal-bright)')}
         onMouseLeave={(e) => (e.currentTarget.style.color = '#A0B2C6')}
-        aria-label={comingSoon ? `${label} (coming soon)` : label}
-        title={comingSoon ? 'Coming soon' : undefined}
+        aria-label={label}
       >
         {label}
-        {comingSoon && <span style={{ fontSize: '10px', color: 'var(--teal-bright)', fontWeight: '700' }}>SOON</span>}
       </a>
     </li>
   );
@@ -94,8 +94,8 @@ export default function Footer({ onOpenBooking, onNavigateNavigator }) {
               Support & Trust
             </h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              {LEGAL_LINKS.map(({ label, href, comingSoon }) => (
-                <FooterLink key={href} href={href} label={label} comingSoon={comingSoon} />
+              {LEGAL_LINKS.map(({ label, href }) => (
+                <FooterLink key={href} href={href} label={label} />
               ))}
             </ul>
           </div>
