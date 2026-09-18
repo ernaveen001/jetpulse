@@ -5,7 +5,10 @@ import TrustStrip from './components/TrustStrip';
 import CoreEnginesSection from './components/CoreEnginesSection';
 import HealthcareJourney from './components/HealthcareJourney';
 import Footer from './components/Footer';
+import SEOHead from './components/SEOHead';
+import NotFound from './components/NotFound';
 import PublicSeoPage, { isPublicSeoPath } from './components/PublicSeoPage';
+import { SEO_ROUTES, SITE_URL } from './seo/seoConfig';
 
 // Lazy-load heavy components — they only load when needed
 const CompanionBookingModal = lazy(() => import('./components/CompanionBookingModal'));
@@ -64,6 +67,7 @@ export default function App() {
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
+  // 1. Check if on known Public SEO Route
   if (isPublicSeoPath(pathname)) {
     return (
       <>
@@ -84,9 +88,25 @@ export default function App() {
     );
   }
 
+  // 2. Check if on Unknown URL (404 Not Found)
+  if (pathname !== '/') {
+    return (
+      <NotFound
+        onNavigateHome={navigateToHome}
+        onOpenBooking={handleOpenBooking}
+      />
+    );
+  }
+
+  // 3. SaaS App Dashboard View (Private, non-indexed state)
   if (currentView === 'app') {
     return (
       <Suspense fallback={<SectionLoader />}>
+        <SEOHead
+          title="JetPulse Healthcare Dashboard | Private"
+          description="JetPulse private health records and family coordination dashboard."
+          robots="noindex, nofollow"
+        />
         <div>
           <SaaSAppDashboard
             onOpenBooking={handleOpenBooking}
@@ -104,8 +124,18 @@ export default function App() {
     );
   }
 
+  // 4. Primary Public Homepage
+  const homeSeo = SEO_ROUTES['/'];
+
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <SEOHead
+        title={homeSeo.title}
+        description={homeSeo.description}
+        canonical={homeSeo.canonical}
+        keywords={[homeSeo.primaryKeyword, ...homeSeo.secondaryKeywords]}
+        robots="index, follow"
+      />
 
       {/* GLOBAL STICKY NAVIGATION */}
       <Navigation

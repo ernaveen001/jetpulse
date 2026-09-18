@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
+Disallow: /api/
 
+# Sitemap location
 Sitemap: https://www.jetpulse.in/sitemap.xml
+
+# Canonical Host
+Host: https://www.jetpulse.in

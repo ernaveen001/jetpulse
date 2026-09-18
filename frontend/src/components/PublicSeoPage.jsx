@@ -1,228 +1,205 @@
-import React, { useEffect } from 'react';
-import { ArrowLeft, ArrowRight, CheckCircle2, ShieldCheck } from 'lucide-react';
-
-const SITE_URL = 'https://www.jetpulse.in';
-
-const PAGE_CONTENT = {
-  '/healthcare-companion': {
-    title: 'Healthcare Companion Services | JetPulse',
-    description: 'Book a verified healthcare companion for doctor visits, diagnostics, hospital navigation, and post-discharge support.',
-    heading: 'A trusted companion for the practical side of healthcare.',
-    intro: 'JetPulse helps patients and families manage the logistics around care with trained, verified companions and clear updates.',
-    points: ['Doctor and clinic visit assistance', 'Diagnostic test and lab support', 'Hospital registration and navigation', 'Pickup, transport, and doorstep drop', 'Remote updates for family members'],
-    cta: 'Book a healthcare companion',
-  },
-  '/hospital-navigation': {
-    title: 'Hospital Navigation Assistance | JetPulse',
-    description: 'Get practical help with hospital registration, OPD navigation, paperwork, appointments, and family updates.',
-    heading: 'Make complex hospital visits easier to manage.',
-    intro: 'From finding the right department to completing practical tasks, JetPulse companions help patients move through hospital visits with less stress.',
-    points: ['OPD desk and token guidance', 'Department and ward navigation', 'Admission and paperwork support', 'Wheelchair and mobility assistance', 'Progress updates for family'],
-    cta: 'Get hospital assistance',
-  },
-  '/diagnostic-test-assistance': {
-    title: 'Diagnostic Test Assistance | JetPulse',
-    description: 'Get help coordinating blood tests, MRI scans, radiology appointments, and other diagnostic visits.',
-    heading: 'Get tests done with practical support by your side.',
-    intro: 'JetPulse companions can help organize the visit, navigate the facility, manage documents, and share updates with authorized family members.',
-    points: ['Blood test and sample collection visits', 'MRI, CT, and radiology navigation', 'Appointment and document coordination', 'Mobility support inside facilities', 'Prescription and report collection'],
-    cta: 'Arrange diagnostic assistance',
-  },
-  '/post-discharge-care': {
-    title: 'Post-Discharge Support | JetPulse',
-    description: 'Arrange practical post-discharge support including transport home, prescription collection, and recovery setup.',
-    heading: 'Support that continues after leaving the hospital.',
-    intro: 'Returning home after treatment can involve more logistics. JetPulse helps families arrange non-clinical support for the journey home and immediate setup.',
-    points: ['Safe transport coordination', 'Prescription and document collection', 'Doorstep drop and mobility assistance', 'Basic recovery-space setup support', 'Updates for family members'],
-    cta: 'Arrange post-discharge support',
-  },
-  '/care-navigator': {
-    title: 'Care Navigator | Healthcare Options Guide | JetPulse',
-    description: 'Use JetPulse Care Navigator to organize healthcare questions, reports, appointments, and nearby care options.',
-    heading: 'A clearer next step when healthcare feels difficult to navigate.',
-    intro: 'Care Navigator helps organize information and explore appropriate healthcare options. It is an informational tool, not a replacement for a clinician.',
-    points: ['Organize symptoms and care questions', 'Review reports and prescriptions', 'Explore nearby healthcare options', 'Keep care journeys organized', 'Connect with practical assistance'],
-    cta: 'Open Care Navigator',
-  },
-  '/family-health-management': {
-    title: 'Family Health Management | JetPulse',
-    description: 'Keep family appointments, reports, care journeys, and companion updates organized in one private timeline.',
-    heading: 'Keep your family’s healthcare connected.',
-    intro: 'JetPulse gives families a shared way to coordinate appointments, reports, journeys, and practical assistance across cities.',
-    points: ['Family member profiles', 'Shared appointment and report tracking', 'Remote booking for loved ones', 'Companion updates with consent', 'Organized health journey timelines'],
-    cta: 'Explore family health support',
-  },
-  '/cities/bangalore': {
-    title: 'Healthcare Companion Services in Bangalore | JetPulse',
-    description: 'Explore JetPulse healthcare companion, hospital navigation, and diagnostic assistance options in Bangalore.',
-    heading: 'Practical healthcare assistance in Bangalore.',
-    intro: 'JetPulse helps people in Bangalore arrange non-clinical support for doctor visits, diagnostic appointments, hospital navigation, and family coordination. Confirm current availability when booking.',
-    points: ['Doctor and clinic visit support', 'Diagnostic appointment assistance', 'Hospital registration and navigation', 'Remote coordination for family', 'Availability confirmed during booking'],
-    cta: 'Check Bangalore availability',
-  },
-  '/cities/varanasi': {
-    title: 'Healthcare Companion Services in Varanasi | JetPulse',
-    description: 'Explore JetPulse healthcare companion, hospital navigation, and diagnostic assistance options in Varanasi.',
-    heading: 'Practical healthcare assistance in Varanasi.',
-    intro: 'JetPulse helps families arrange non-clinical support in Varanasi for healthcare visits, diagnostic appointments, hospital navigation, and updates to relatives living elsewhere.',
-    points: ['Doctor and hospital visit support', 'Diagnostic appointment assistance', 'Mobility and navigation help', 'Remote family booking support', 'Availability confirmed during booking'],
-    cta: 'Check Varanasi availability',
-  },
-  '/cities/jaipur': {
-    title: 'Healthcare Companion Services in Jaipur | JetPulse',
-    description: 'Explore JetPulse healthcare companion, hospital navigation, and diagnostic assistance options in Jaipur.',
-    heading: 'Practical healthcare assistance in Jaipur.',
-    intro: 'JetPulse helps people and families arrange non-clinical support in Jaipur for appointments, diagnostics, hospital visits, and practical healthcare logistics.',
-    points: ['Doctor and clinic visit support', 'Diagnostic and report collection help', 'Hospital navigation assistance', 'Family updates with consent', 'Availability confirmed during booking'],
-    cta: 'Check Jaipur availability',
-  },
-  '/about': {
-    title: 'About JetPulse | Healthcare Assistance and Navigation',
-    description: 'Learn how JetPulse helps people and families handle the practical side of healthcare.',
-    heading: 'Healthcare, handled with more clarity and care.',
-    intro: 'JetPulse is designed for people who need practical, non-clinical support around healthcare visits, diagnostics, hospital navigation, and family coordination.',
-    points: ['Non-clinical assistance', 'Verified companion network', 'Family-centered coordination', 'Clear service expectations', 'Privacy-conscious updates'],
-    cta: 'Get assistance',
-  },
-};
-
-const TRUST_PAGES = {
-  '/privacy': {
-    title: 'Privacy Policy | JetPulse',
-    heading: 'Privacy Policy',
-    intro: 'JetPulse is committed to handling personal information responsibly. This page explains the categories of information we may collect, why we use them, and the choices available to you.',
-  },
-  '/terms': {
-    title: 'Terms of Service | JetPulse',
-    heading: 'Terms of Service',
-    intro: 'These terms describe the responsibilities and expectations for using JetPulse services. JetPulse provides non-clinical assistance and does not replace emergency or professional medical care.',
-  },
-  '/verification': {
-    title: 'Companion Verification | JetPulse',
-    heading: 'Companion Verification',
-    intro: 'JetPulse is building a consistent verification process for companions, including identity checks, service training, and clear conduct expectations. Verification details should be confirmed before service launch.',
-  },
-  '/accessibility': {
-    title: 'Accessibility | JetPulse',
-    heading: 'Accessibility',
-    intro: 'JetPulse aims to make healthcare assistance usable for people with different mobility, vision, hearing, and cognitive needs. Contact us with accessibility feedback or support requests.',
-  },
-  '/help': {
-    title: 'Help Center | JetPulse',
-    heading: 'Help Center',
-    intro: 'Find answers about booking a companion, preparing for a healthcare visit, sharing updates with family, and using Care Navigator.',
-  },
-};
-
-function updateMetadata(title, description) {
-  document.title = title;
-  const descriptionTag = document.querySelector('meta[name="description"]');
-  if (descriptionTag) descriptionTag.setAttribute('content', description);
-  const canonical = document.querySelector('link[rel="canonical"]');
-  if (canonical) canonical.setAttribute('href', `${SITE_URL}${window.location.pathname}`);
-
-  const ogTitle = document.querySelector('meta[property="og:title"]');
-  const ogDescription = document.querySelector('meta[property="og:description"]');
-  const ogUrl = document.querySelector('meta[property="og:url"]');
-  if (ogTitle) ogTitle.setAttribute('content', title);
-  if (ogDescription) ogDescription.setAttribute('content', description);
-  if (ogUrl) ogUrl.setAttribute('content', `${SITE_URL}${window.location.pathname}`);
-}
+import React from 'react';
+import { ArrowLeft, ArrowRight, CheckCircle2, ShieldCheck, HelpCircle, MapPin, Sparkles } from 'lucide-react';
+import SEOHead from './SEOHead';
+import { SEO_ROUTES, ALL_SERVICES_NAV, ALL_CITIES_NAV, SITE_URL } from '../seo/seoConfig';
 
 export function isPublicSeoPath(pathname) {
-  return Boolean(PAGE_CONTENT[pathname] || TRUST_PAGES[pathname]);
+  return Boolean(SEO_ROUTES[pathname]);
 }
 
-const CITY_LINKS = [
-  { href: '/cities/bangalore', label: 'Bangalore' },
-  { href: '/cities/varanasi', label: 'Varanasi' },
-  { href: '/cities/jaipur', label: 'Jaipur' },
-];
-
 export default function PublicSeoPage({ pathname, onOpenBooking, onNavigateHome }) {
-  const content = PAGE_CONTENT[pathname] || TRUST_PAGES[pathname];
-  const isTrustPage = Boolean(TRUST_PAGES[pathname]);
+  const content = SEO_ROUTES[pathname] || SEO_ROUTES['/healthcare-companion'];
+  const isCity = pathname.startsWith('/cities/');
+  const isLegalOrTrust = ['Legal', 'Trust'].includes(content.category);
+  const canonicalUrl = content.canonical || `${SITE_URL}${pathname}`;
+  const cityName = isCity ? content.heading.split('in ').pop()?.trim() : null;
 
-  useEffect(() => {
-    updateMetadata(content.title, content.description || content.intro);
+  const breadcrumbSchema = {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+      { '@type': 'ListItem', position: 2, name: isCity ? 'Cities' : (content.category || 'Services'), item: `${SITE_URL}/#${isCity ? 'cities' : 'services'}` },
+      { '@type': 'ListItem', position: 3, name: content.heading, item: canonicalUrl }
+    ]
+  };
 
-    const schema = document.createElement('script');
-    schema.id = 'jetpulse-page-schema';
-    schema.type = 'application/ld+json';
-    schema.textContent = JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': content.points ? 'Service' : 'WebPage',
-      name: content.title,
-      description: content.description || content.intro,
-      url: `${SITE_URL}${pathname}`,
-      provider: {
-        '@type': 'Organization',
-        name: 'JetPulse',
-        url: SITE_URL,
-      },
-      ...(pathname.startsWith('/cities/') ? { areaServed: content.heading.replace('Practical healthcare assistance in ', '').replace('.', '') } : {}),
+  const mainSchema = isCity
+    ? {
+        '@type': ['LocalBusiness', 'MedicalBusiness'],
+        name: `JetPulse Healthcare Companion - ${cityName}`,
+        description: content.description,
+        url: canonicalUrl,
+        priceRange: '₹₹',
+        areaServed: { '@type': 'City', name: cityName },
+        provider: { '@type': 'Organization', name: 'JetPulse', url: SITE_URL }
+      }
+    : {
+        '@type': 'Service',
+        name: content.title,
+        description: content.description || content.intro,
+        url: canonicalUrl,
+        provider: { '@type': 'Organization', name: 'JetPulse', url: SITE_URL },
+        serviceType: content.category || 'Healthcare Support'
+      };
+
+  const schemas = [breadcrumbSchema, mainSchema];
+
+  if (content.faqs && content.faqs.length > 0) {
+    schemas.push({
+      '@type': 'FAQPage',
+      mainEntity: content.faqs.map(faq => ({
+        '@type': 'Question',
+        name: faq.q,
+        acceptedAnswer: { '@type': 'Answer', text: faq.a }
+      }))
     });
-    document.head.appendChild(schema);
+  }
 
-    return () => schema.remove();
-  }, [content]);
+  const parentName = isCity ? 'Cities' : (content.category || 'Services');
 
   return (
-    <div className="seo-page-shell">
-      <header className="seo-page-header">
-        <div className="jp-container seo-page-header-inner">
-          <button className="seo-back-link" type="button" onClick={onNavigateHome}>
-            <ArrowLeft size={16} aria-hidden="true" />
-            JetPulse
+    <div className="seo-page-shell" style={{ backgroundColor: '#F8FAFC', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <SEOHead
+        title={content.title}
+        description={content.description || content.intro}
+        canonical={canonicalUrl}
+        keywords={content.secondaryKeywords ? [content.primaryKeyword, ...content.secondaryKeywords] : content.primaryKeyword}
+        robots={content.isIndexable ? 'index, follow' : 'noindex, follow'}
+        schemaGraph={schemas}
+      />
+
+      {/* HEADER */}
+      <header className="seo-page-header" style={{ backgroundColor: 'rgba(255, 255, 255, 0.95)', borderBottom: '1px solid #E2E8F0', position: 'sticky', top: 0, zIndex: 50, backdropFilter: 'blur(8px)' }}>
+        <div className="jp-container seo-page-header-inner" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '70px' }}>
+          <button className="seo-back-link" type="button" onClick={onNavigateHome} style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'none', border: 'none', cursor: 'pointer', fontSize: '18px', fontWeight: '800', color: '#082B4C' }}>
+            <ArrowLeft size={18} color="#0F9F96" aria-hidden="true" />
+            <span>JetPulse</span>
           </button>
-          {!isTrustPage && (
+          {!isLegalOrTrust && (
             <button className="jp-btn jp-btn-primary jp-btn-sm" type="button" onClick={onOpenBooking}>
-              Get assistance <ArrowRight size={16} aria-hidden="true" />
+              <span>Get Assistance</span> <ArrowRight size={16} aria-hidden="true" />
             </button>
           )}
         </div>
       </header>
 
-      <main className="seo-page-main">
-        <div className="jp-container seo-page-content">
-          <div className="seo-page-eyebrow">
-            <ShieldCheck size={16} aria-hidden="true" /> JetPulse healthcare support
-          </div>
-          <h1>{content.heading}</h1>
-          <p className="seo-page-intro">{content.intro}</p>
+      {/* MAIN CONTENT */}
+      <main className="seo-page-main" style={{ flex: 1, padding: '40px 0 80px 0' }}>
+        <div className="jp-container seo-page-content" style={{ maxWidth: '840px', margin: '0 auto' }}>
+          
+          {/* BREADCRUMB */}
+          <nav aria-label="Breadcrumb" style={{ marginBottom: '24px' }}>
+            <ol style={{ display: 'flex', gap: '8px', listStyle: 'none', padding: 0, margin: 0, fontSize: '13px', color: '#64748b', alignItems: 'center', flexWrap: 'wrap' }}>
+              <li>
+                <button type="button" onClick={onNavigateHome} style={{ background: 'none', border: 'none', color: '#0F9F96', fontWeight: '600', cursor: 'pointer', padding: 0, fontSize: '13px' }}>
+                  Home
+                </button>
+              </li>
+              <li style={{ color: '#cbd5e1' }}>/</li>
+              <li><span style={{ color: '#64748b' }}>{parentName}</span></li>
+              <li style={{ color: '#cbd5e1' }}>/</li>
+              <li aria-current="page" style={{ color: '#082B4C', fontWeight: '600' }}>{content.heading.split(' ')[0]}</li>
+            </ol>
+          </nav>
 
+          {/* EYEBROW */}
+          <div className="seo-page-eyebrow" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '12px', fontWeight: '700', textTransform: 'uppercase', color: '#0F9F96', backgroundColor: '#EAF8F6', padding: '4px 12px', borderRadius: '99px', marginBottom: '16px' }}>
+            <ShieldCheck size={14} aria-hidden="true" /> JetPulse Healthcare Support • {content.category || 'Service'}
+          </div>
+
+          {/* MAIN H1 */}
+          <h1 style={{ fontSize: '34px', fontWeight: '800', color: '#082B4C', lineHeight: 1.25, marginBottom: '16px' }}>
+            {content.heading}
+          </h1>
+
+          {/* INTRO */}
+          <p className="seo-page-intro" style={{ fontSize: '17px', color: '#475569', lineHeight: 1.65, marginBottom: '32px' }}>
+            {content.intro}
+          </p>
+
+          {/* KEY POINTS / FEATURES */}
           {content.points && (
-            <section className="seo-page-section" aria-labelledby="service-includes-heading">
-              <h2 id="service-includes-heading">What this includes</h2>
-              <ul className="seo-page-list">
+            <section className="seo-page-section" aria-labelledby="service-includes-heading" style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '16px', padding: '28px', marginBottom: '32px', boxShadow: '0 1px 3px rgba(0,0,0,0.05)' }}>
+              <h2 id="service-includes-heading" style={{ fontSize: '20px', fontWeight: '800', color: '#082B4C', marginBottom: '18px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Sparkles size={20} color="#0F9F96" aria-hidden="true" /> Key Features & Inclusions
+              </h2>
+              <ul className="seo-page-list" style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 {content.points.map((point) => (
-                  <li key={point}><CheckCircle2 size={18} aria-hidden="true" /> {point}</li>
+                  <li key={point} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: '15px', color: '#334155', lineHeight: 1.5 }}>
+                    <CheckCircle2 size={18} color="#0F9F96" style={{ flexShrink: 0, marginTop: '2px' }} aria-hidden="true" />
+                    <span>{point}</span>
+                  </li>
                 ))}
               </ul>
             </section>
           )}
 
-          {isTrustPage && (
-            <section className="seo-page-section">
-              <h2>Important information</h2>
-              <p>For urgent symptoms or emergencies, contact local emergency services or a qualified healthcare professional. JetPulse does not diagnose conditions, prescribe treatment, or guarantee clinical outcomes.</p>
-            </section>
+          {/* PRIMARY CTA */}
+          {!isLegalOrTrust && (
+            <div style={{ marginBottom: '36px' }}>
+              <button className="jp-btn jp-btn-primary jp-btn-lg" type="button" onClick={onOpenBooking} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                <span>{content.cta || 'Get Assistance Now'}</span> <ArrowRight size={18} aria-hidden="true" />
+              </button>
+            </div>
           )}
 
-          {!isTrustPage && (
-            <button className="jp-btn jp-btn-primary jp-btn-lg" type="button" onClick={onOpenBooking}>
-              {content.cta} <ArrowRight size={18} aria-hidden="true" />
-            </button>
-          )}
-
-          {!isTrustPage && !pathname.startsWith('/cities/') && (
-            <section className="seo-page-section seo-page-cities" aria-labelledby="service-area-heading">
-              <h2 id="service-area-heading">Explore service areas</h2>
-              <div className="seo-page-city-links">
-                {CITY_LINKS.map((city) => <a key={city.href} href={city.href}>{city.label}</a>)}
+          {/* FAQS ACCORDION */}
+          {content.faqs && content.faqs.length > 0 && (
+            <section className="seo-page-section seo-faqs-section" aria-labelledby="faqs-heading" style={{ marginBottom: '36px' }}>
+              <h2 id="faqs-heading" style={{ fontSize: '22px', fontWeight: '800', color: '#082B4C', marginBottom: '18px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <HelpCircle size={22} color="#0F9F96" aria-hidden="true" /> Frequently Asked Questions
+              </h2>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                {content.faqs.map((faq, idx) => (
+                  <details key={idx} style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '16px 20px', cursor: 'pointer' }}>
+                    <summary style={{ fontWeight: '700', color: '#082B4C', fontSize: '15px', outline: 'none' }}>
+                      {faq.q}
+                    </summary>
+                    <p style={{ marginTop: '10px', color: '#475569', lineHeight: 1.6, fontSize: '14px', marginBottom: 0 }}>
+                      {faq.a}
+                    </p>
+                  </details>
+                ))}
               </div>
             </section>
           )}
+
+          {/* TRUST NOTICE */}
+          {isLegalOrTrust && (
+            <section className="seo-page-section" style={{ backgroundColor: '#FFFBEB', border: '1px solid #FDE68A', borderRadius: '14px', padding: '20px', marginBottom: '32px' }}>
+              <h2 style={{ fontSize: '16px', fontWeight: '700', color: '#92400E', marginBottom: '8px' }}>Important Healthcare Notice</h2>
+              <p style={{ fontSize: '13px', color: '#78350F', lineHeight: 1.5, margin: 0 }}>
+                JetPulse provides non-clinical healthcare assistance, mobility escorts, and navigation support. For acute emergencies, dial local emergency services (112 / 108) immediately.
+              </p>
+            </section>
+          )}
+
+          {/* INTERNAL CROSS-LINKING HUBS */}
+          <section className="seo-page-section seo-page-interlinks" style={{ marginTop: '48px', paddingTop: '32px', borderTop: '1px solid #E2E8F0' }}>
+            <h3 style={{ fontSize: '16px', fontWeight: '800', color: '#082B4C', marginBottom: '14px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              Explore Other Healthcare Services
+            </h3>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '28px' }}>
+              {ALL_SERVICES_NAV.map((srv) => (
+                <a key={srv.href} href={srv.href} style={{ fontSize: '13px', color: '#082B4C', backgroundColor: '#FFFFFF', border: '1px solid #CBD5E1', padding: '6px 14px', borderRadius: '8px', textDecoration: 'none', fontWeight: '500', transition: 'all 0.15s ease' }}>
+                  {srv.label}
+                </a>
+              ))}
+            </div>
+
+            <h3 style={{ fontSize: '16px', fontWeight: '800', color: '#082B4C', marginBottom: '14px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              <MapPin size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} color="#0F9F96" aria-hidden="true" />
+              Service Locations Across India
+            </h3>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+              {ALL_CITIES_NAV.map((city) => (
+                <a key={city.href} href={city.href} style={{ fontSize: '13px', color: '#082B4C', backgroundColor: '#FFFFFF', border: '1px solid #CBD5E1', padding: '6px 14px', borderRadius: '8px', textDecoration: 'none', fontWeight: '500', transition: 'all 0.15s ease' }}>
+                  {city.label}
+                </a>
+              ))}
+            </div>
+          </section>
+
         </div>
       </main>
     </div>
