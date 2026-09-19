@@ -1,34 +1,34 @@
 import React from 'react';
-import { ShieldCheck, MapPin } from 'lucide-react';
+import { ShieldCheck, MapPin, Heart } from 'lucide-react';
 import JetPulseLogo from './JetPulseLogo';
 
-const PRODUCT_LINKS = [
-  { label: 'Healthcare Companion',       href: '/healthcare-companion' },
-  { label: 'Hospital Navigation',        href: '/hospital-navigation' },
-  { label: 'Diagnostic Assistance',      href: '/diagnostic-test-assistance' },
-  { label: 'Post-Discharge Care',        href: '/post-discharge-care' },
-  { label: 'AI Care Navigator',          href: '/care-navigator' },
-  { label: 'Family Health Hub',          href: '/family-health-management' },
-  { label: 'Elderly Care Companion',     href: '/elderly-care-companion' },
-  { label: 'Bedside Support',            href: '/bedside-assistance' },
+const SERVICE_LINKS = [
+  { label: 'Healthcare Companion',        href: '/healthcare-companion' },
+  { label: 'Doctor Visit Assistance',     href: '/doctor-visit-assistance' },
+  { label: 'Diagnostic Test Assistance',  href: '/diagnostic-test-assistance' },
+  { label: 'Hospital Visit Assistance',   href: '/hospital-visit-assistance' },
+  { label: 'Post-Discharge Care',         href: '/post-discharge-care' },
+  { label: 'Family Healthcare',           href: '/family-healthcare' },
+  { label: 'AI Care Navigator',           href: '/care-navigator' },
+  { label: 'All Services Directory',      href: '/services' },
 ];
 
-const CITY_LINKS = [
-  { label: 'Bangalore (Bengaluru)',      href: '/cities/bangalore' },
-  { label: 'Varanasi (Kashi)',           href: '/cities/varanasi' },
-  { label: 'Jaipur',                     href: '/cities/jaipur' },
-  { label: 'Delhi NCR (Gurgaon/Noida)',  href: '/cities/delhi-ncr' },
-  { label: 'Mumbai',                     href: '/cities/mumbai' },
-  { label: 'Hyderabad',                  href: '/cities/hyderabad' },
+const GUIDES_AND_LOCATIONS = [
+  { label: 'How JetPulse Works',          href: '/how-it-works' },
+  { label: 'Frequently Asked Questions',  href: '/faq' },
+  { label: 'Bangalore Companion Hub',     href: '/cities/bangalore' },
+  { label: 'Varanasi Companion Hub',      href: '/cities/varanasi' },
+  { label: 'Jaipur Companion Hub',        href: '/cities/jaipur' },
 ];
 
-const LEGAL_LINKS = [
-  { label: 'About JetPulse',             href: '/about' },
-  { label: 'Help & FAQs',                href: '/help' },
-  { label: 'Companion Verification',     href: '/verification' },
-  { label: 'Privacy Policy',             href: '/privacy' },
-  { label: 'Terms of Service',           href: '/terms' },
-  { label: 'Accessibility Statement',     href: '/accessibility' },
+const TRUST_AND_LEGAL = [
+  { label: 'About JetPulse',              href: '/about' },
+  { label: 'Contact Support',             href: '/contact' },
+  { label: 'Help Center',                 href: '/help' },
+  { label: 'Companion Verification',      href: '/verification' },
+  { label: 'Privacy Policy',              href: '/privacy' },
+  { label: 'Terms of Service',            href: '/terms' },
+  { label: 'Accessibility Standard',      href: '/accessibility' },
 ];
 
 function FooterLink({ href, label }) {
@@ -38,17 +38,15 @@ function FooterLink({ href, label }) {
         href={href}
         style={{
           color: '#A0B2C6',
-          fontSize: '13px',
+          fontSize: '14px',
           display: 'inline-flex',
           alignItems: 'center',
           gap: '4px',
           transition: 'color 0.2s ease',
-          cursor: 'pointer',
           textDecoration: 'none',
         }}
         onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--teal-bright)')}
         onMouseLeave={(e) => (e.currentTarget.style.color = '#A0B2C6')}
-        aria-label={label}
       >
         {label}
       </a>
@@ -61,15 +59,16 @@ export default function Footer({ onOpenBooking, onNavigateNavigator }) {
     <footer style={{
       backgroundColor: 'var(--navy-dark)',
       color: 'var(--white)',
-      padding: '60px 0 32px 0',
+      padding: '64px 0 32px 0',
       borderTop: '1px solid rgba(255, 255, 255, 0.1)'
     }}>
       <div className="jp-container">
 
+        {/* 4-COLUMN FOOTER GRID */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: '1.6fr 1fr 1fr 1fr 1.2fr',
-          gap: '32px',
+          gridTemplateColumns: '1.8fr 1.2fr 1.2fr 1.2fr',
+          gap: '36px',
           marginBottom: '48px'
         }} className="footer-grid">
 
@@ -78,98 +77,64 @@ export default function Footer({ onOpenBooking, onNavigateNavigator }) {
             <div style={{ marginBottom: '16px' }}>
               <JetPulseLogo size={42} lightMode={true} />
             </div>
-            <p style={{ fontSize: '13px', color: '#A0B2C6', lineHeight: 1.6, marginBottom: '20px', maxWidth: '300px' }}>
-              Intelligent healthcare companion booking, hospital OPD navigation, and connected family health ecosystem across India.
+            <p style={{ fontSize: '14px', color: '#A0B2C6', lineHeight: 1.6, marginBottom: '20px', maxWidth: '320px' }}>
+              Verified healthcare companions, hospital visit navigation, diagnostic assistance, and connected family healthcare management across India.
             </p>
-            <div style={{ fontSize: '13px', color: 'var(--teal-bright)', fontWeight: '700' }}>
+            <div style={{ fontSize: '13px', color: 'var(--teal-bright)', fontWeight: '700', marginBottom: '16px' }}>
               "Healthcare, Handled."
+            </div>
+            <div style={{ display: 'flex', gap: '8px' }}>
+              <button
+                onClick={onOpenBooking}
+                className="jp-btn jp-btn-primary jp-btn-sm"
+                style={{ borderRadius: '8px' }}
+              >
+                <span>Book a Companion</span>
+              </button>
             </div>
           </div>
 
-          {/* PRODUCT NAVIGATION */}
+          {/* SERVICES COLUMN */}
           <div>
             <h4 style={{ fontSize: '13px', fontWeight: '800', color: 'var(--white)', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-              Services
+              Healthcare Services
             </h4>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '8px', padding: 0, margin: 0 }}>
-              {PRODUCT_LINKS.map(({ label, href }) => (
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              {SERVICE_LINKS.map(({ label, href }) => (
                 <FooterLink key={href} href={href} label={label} />
               ))}
             </ul>
           </div>
 
-          {/* CITIES */}
+          {/* GUIDES & LOCATIONS COLUMN */}
           <div>
             <h4 style={{ fontSize: '13px', fontWeight: '800', color: 'var(--white)', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-              Locations
+              Guides & Locations
             </h4>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '8px', padding: 0, margin: 0 }}>
-              {CITY_LINKS.map(({ label, href }) => (
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              {GUIDES_AND_LOCATIONS.map(({ label, href }) => (
                 <FooterLink key={href} href={href} label={label} />
               ))}
             </ul>
           </div>
 
-          {/* SUPPORT & LEGAL */}
+          {/* TRUST & LEGAL COLUMN */}
           <div>
             <h4 style={{ fontSize: '13px', fontWeight: '800', color: 'var(--white)', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-              Trust & Legal
+              Trust & Support
             </h4>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '8px', padding: 0, margin: 0 }}>
-              {LEGAL_LINKS.map(({ label, href }) => (
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              {TRUST_AND_LEGAL.map(({ label, href }) => (
                 <FooterLink key={href} href={href} label={label} />
               ))}
             </ul>
-          </div>
-
-          {/* GET ASSISTANCE COLUMN */}
-          <div>
-            <h4 style={{ fontSize: '13px', fontWeight: '800', color: 'var(--white)', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-              Need Help Today?
-            </h4>
-            <p style={{ fontSize: '13px', color: '#A0B2C6', marginBottom: '16px', lineHeight: 1.5 }}>
-              Book an urgent or scheduled companion for your clinic or hospital visit.
-            </p>
-            <button
-              onClick={onOpenBooking}
-              className="jp-btn jp-btn-primary"
-              style={{ width: '100%' }}
-            >
-              <span>Get Assistance</span>
-            </button>
-
-            <button
-              onClick={onNavigateNavigator}
-              style={{
-                width: '100%',
-                marginTop: '10px',
-                padding: '10px',
-                background: 'none',
-                border: '1px solid rgba(255, 255, 255, 0.15)',
-                borderRadius: 'var(--radius-md)',
-                color: '#A0B2C6',
-                fontSize: '12px',
-                cursor: 'pointer',
-                transition: 'all 0.2s ease'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = 'var(--teal-bright)';
-                e.currentTarget.style.color = 'var(--teal-bright)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)';
-                e.currentTarget.style.color = '#A0B2C6';
-              }}
-            >
-              Care Navigator AI →
-            </button>
           </div>
 
         </div>
 
-        {/* MEDICAL DISCLAIMER STRIP */}
+        {/* NON-CLINICAL HEALTHCARE DISCLAIMER */}
         <div style={{
-          padding: '18px 22px',
+          padding: '18px 24px',
           borderRadius: '14px',
           backgroundColor: 'rgba(255, 255, 255, 0.04)',
           border: '1px solid rgba(255, 255, 255, 0.08)',
@@ -183,7 +148,7 @@ export default function Footer({ onOpenBooking, onNavigateNavigator }) {
             <strong style={{ color: '#A0B2C6' }}>Healthcare Disclaimer: </strong>
             JetPulse provides non-clinical healthcare assistance, mobility escorts, and navigation support services.
             Information provided through the platform or AI Care Navigator is for informational and organizational purposes only
-            and is not a substitute for professional medical advice, diagnosis, or treatment.
+            and is not a substitute for professional medical advice, diagnosis, or treatment. In case of an emergency, please dial <strong>112 / 108</strong>.
           </p>
         </div>
 
@@ -192,7 +157,7 @@ export default function Footer({ onOpenBooking, onNavigateNavigator }) {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          fontSize: '12px',
+          fontSize: '13px',
           color: '#60758A',
           paddingTop: '20px',
           borderTop: '1px solid rgba(255, 255, 255, 0.06)',
@@ -203,24 +168,13 @@ export default function Footer({ onOpenBooking, onNavigateNavigator }) {
             © {new Date().getFullYear()} JetPulse Technologies Inc. All rights reserved.
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <span>Built with care for patients and families across India</span>
+            <span>Built with</span>
+            <Heart size={13} color="var(--teal-bright)" fill="var(--teal-bright)" aria-hidden="true" />
+            <span>for families everywhere across India</span>
           </div>
         </div>
 
       </div>
-
-      <style>{`
-        @media (max-width: 992px) {
-          .footer-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
-          }
-        }
-        @media (max-width: 540px) {
-          .footer-grid {
-            grid-template-columns: 1fr !important;
-          }
-        }
-      `}</style>
     </footer>
   );
 }

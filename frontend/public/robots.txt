@@ -1,9 +1,14 @@
 User-agent: *
 Allow: /
+Disallow: /login
+Disallow: /signup
+Disallow: /forgot-password
+Disallow: /dashboard
+Disallow: /profile
+Disallow: /bookings
+Disallow: /payment
+Disallow: /account
+Disallow: /admin
 Disallow: /api/
 
-# Sitemap location
 Sitemap: https://www.jetpulse.in/sitemap.xml
-
-# Canonical Host
-Host: https://www.jetpulse.in

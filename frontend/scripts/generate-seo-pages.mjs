@@ -5,684 +5,86 @@ import { fileURLToPath } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const frontendRoot = path.resolve(__dirname, '..');
 const distRoot = path.join(frontendRoot, 'dist');
+const publicRoot = path.join(frontendRoot, 'public');
 const siteUrl = 'https://www.jetpulse.in';
 
-const pages = [
-  // ── CORE SERVICES ──────────────────────────────────────────
-  {
-    path: '/healthcare-companion',
-    category: 'Services',
-    title: 'Healthcare Companion Services in India | JetPulse',
-    description: 'Book verified healthcare companions for doctor visits, clinic appointments, diagnostics, and elderly patient escorts across India.',
-    heading: 'Verified Healthcare Companions for Doctor & Clinic Visits',
-    intro: 'JetPulse pairs patients and families with background-verified, trained healthcare companions who provide doorstep pickup, OPD registration help, token queue management, and real-time family updates.',
-    points: [
-      'Doorstep pickup and comfortable clinic / hospital transit',
-      'Doctor appointment registration and token queue management',
-      'Diagnostic test and lab sample collection assistance',
-      'Prescription collection and doctor instructions notes',
-      'Live milestone updates and notes shared with family members'
-    ],
-    faqs: [
-      { q: 'Who are JetPulse healthcare companions?', a: 'Our companions are background-verified, compassionate professionals trained in healthcare logistics, elderly mobility assistance, and patient communication.' },
-      { q: 'Can I book a companion for my elderly parents?', a: 'Yes! You can book remotely for parents or relatives living in another city, tracking their entire appointment from your phone.' },
-      { q: 'How far in advance do I need to book?', a: 'We offer instant dispatch (subject to city availability within 30-45 minutes) as well as advance scheduled bookings.' }
-    ],
-    cta: 'Book a Healthcare Companion'
-  },
-  {
-    path: '/doctor-visit-assistance',
-    category: 'Services',
-    title: 'Doctor Visit Assistance & Clinic Escort Services | JetPulse',
-    description: 'Get dedicated assistance for doctor and clinic appointments. Registration, token queue management, consultation note-taking, and doorstep transit.',
-    heading: 'Doctor Visit Assistance & Outpatient Clinic Support',
-    intro: 'Navigating busy outpatient clinics alone can be stressful. A JetPulse companion escorts you from your doorstep, manages token lines, assists with paperwork, and helps you stay organized throughout the consult.',
-    points: [
-      'Doorstep pickup and return escort for doctor appointments',
-      'OPD desk check-in, token retrieval, and queue monitoring',
-      'Accompanying inside consultation chamber upon patient request',
-      'Prescription collection and pharmacy bill settlement assistance',
-      'Synchronized appointment notes shared with designated family members'
-    ],
-    faqs: [
-      { q: 'Can the companion enter the doctor’s room with the patient?', a: 'Yes, if requested by the patient or authorized family members to assist with notes, translation, or mobility.' },
-      { q: 'What happens if the doctor is running late?', a: 'Our companions remain by your side throughout the waiting period. Booking extensions can be managed seamlessly via the app.' }
-    ],
-    cta: 'Book Doctor Visit Assistance'
-  },
-  {
-    path: '/hospital-navigation',
-    category: 'Services',
-    title: 'Hospital OPD & Inpatient Navigation Assistance | JetPulse',
-    description: 'Expert assistance navigating hospital OPDs, registration counters, insurance desks, diagnostic labs, and ward admissions.',
-    heading: 'Hospital Navigation & OPD Visit Assistance',
-    intro: 'Large tertiary hospitals can be overwhelming. JetPulse companions guide you smoothly through registration counters, token lines, multi-floor clinic departments, pharmacy queues, and TPA insurance documentation.',
-    points: [
-      'OPD desk registration and department guidance',
-      'Wheelchair arrangement and mobility escort across floors',
-      'TPA health insurance pre-authorization and billing paperwork help',
-      'Coordination between consultation chambers and diagnostic labs',
-      'Real-time status updates sent to remote family members'
-    ],
-    faqs: [
-      { q: 'Will the companion help with wheelchair mobility?', a: 'Yes, our companions assist with wheelchair requests, elevator transfers, and safe mobility throughout hospital premises.' },
-      { q: 'Does JetPulse assist with admission and discharge formalities?', a: 'Yes, companions help organize required ID documents, insurance claim forms, and discharge medicine collection.' }
-    ],
-    cta: 'Get Hospital Navigation Help'
-  },
-  {
-    path: '/hospital-visit-assistance',
-    category: 'Services',
-    title: 'Hospital Visit Assistance & Patient Navigation | JetPulse',
-    description: 'Comprehensive hospital visit assistance for outpatient clinics, diagnostic departments, and inpatient admissions across major Indian hospitals.',
-    heading: 'Hospital Visit Assistance & Patient Escort',
-    intro: 'From navigating complex hospital corridors to handling administrative registration and insurance counters, JetPulse provides hands-on practical assistance for all hospital visits.',
-    points: [
-      'Assistance at registration, billing, and pharmacy counters',
-      'Departmental navigation across multi-building hospital campuses',
-      'Wheelchair transfer and elevator mobility coordination',
-      'Assistance with TPA insurance desk submissions',
-      'Live milestone updates for family members'
-    ],
-    faqs: [
-      { q: 'Which hospitals can companions assist at?', a: 'Companions assist at all major private, public, and government healthcare facilities across our active service cities.' }
-    ],
-    cta: 'Arrange Hospital Visit Assistance'
-  },
-  {
-    path: '/diagnostic-test-assistance',
-    category: 'Services',
-    title: 'Diagnostic Test & Scan Assistance | MRI, CT, Blood Tests | JetPulse',
-    description: 'Get practical support organizing and attending diagnostic appointments including MRI, CT scans, blood panels, ultrasound, and pathology tests.',
-    heading: 'Diagnostic Test & Lab Visit Assistance',
-    intro: 'Undergoing complex tests like contrast MRIs, PET scans, or multiple fasting blood panels is physically demanding. JetPulse companions organize paperwork, assist with wait times, and collect reports.',
-    points: [
-      'Fasting blood collection and pathology lab visit escorts',
-      'MRI, CT scan, X-Ray, and ultrasound navigation',
-      'Prior medical records and doctor prescription organization',
-      'Wheelchair and physical support during waiting periods',
-      'Physical report collection and digital family vault upload'
-    ],
-    faqs: [
-      { q: 'Can the companion pick up physical test reports?', a: 'Yes, companions can collect printed reports and films, and upload digital scans directly to your JetPulse Family Health Vault.' }
-    ],
-    cta: 'Arrange Diagnostic Assistance'
-  },
-  {
-    path: '/post-discharge-care',
-    category: 'Services',
-    title: 'Post-Discharge Hospital Support & Safe Home Transit | JetPulse',
-    description: 'Safe non-clinical post-hospitalization support including discharge paperwork, doorstep escort home, prescription collection, and recovery setup.',
-    heading: 'Post-Discharge Hospital Support & Home Transition',
-    intro: 'Leaving the hospital requires careful logistical coordination. JetPulse provides non-clinical post-discharge assistance to help patients transition safely from hospital bed to home.',
-    points: [
-      'Discharge counter coordination and pharmacy medication pickup',
-      'Safe, assisted wheelchair-to-vehicle transport to doorstep',
-      'Discharge summary document collation and digital storage',
-      'Basic home recovery room setup and vital check reminders',
-      'Immediate milestone updates to family members across cities'
-    ],
-    faqs: [
-      { q: 'Is post-discharge support clinical or non-clinical?', a: 'JetPulse provides non-clinical mobility, transport escort, document handling, and logistics assistance. For medical nursing care, we coordinate with your hospital team.' }
-    ],
-    cta: 'Arrange Post-Discharge Support'
-  },
-  {
-    path: '/care-navigator',
-    category: 'Services',
-    title: 'AI Care Navigator & Doctor Specialist Discovery | JetPulse',
-    description: 'Use JetPulse AI Care Navigator to triage symptoms, understand diagnostic reports, and find recommended specialists and verified hospitals near you.',
-    heading: 'AI Care Navigator: Guidance When Healthcare Feels Complex',
-    intro: 'When unexpected symptoms occur or doctor reports seem complicated, Care Navigator AI clarifies your options, recommends appropriate specialist disciplines, and locates verified clinics near you.',
-    points: [
-      'Conversational symptom guidance and medical specialty recommendation',
-      'Lab report and prescription document scanner for simplified summaries',
-      'Verified hospital and diagnostic clinic discovery by location',
-      'Seamless 1-click booking of companion assistance for recommended visits',
-      'Zero advertising bias in specialist recommendations'
-    ],
-    faqs: [
-      { q: 'Does Care Navigator provide medical diagnoses?', a: 'No. Care Navigator is an advisory and educational tool designed to help you understand options and navigate to qualified healthcare providers.' }
-    ],
-    cta: 'Explore Care Navigator AI'
-  },
-  {
-    path: '/family-healthcare',
-    category: 'Services',
-    title: 'Family Healthcare Support & Remote Coordination | JetPulse',
-    description: 'Coordinate family healthcare appointments, doctor visits, diagnostic records, and companion updates across multiple cities.',
-    heading: 'Family Healthcare Support & Cross-City Care Coordination',
-    intro: 'Keep your entire family connected around health. Book companions for parents in another city, view live visit milestones, and organize all medical records in one synchronized private hub.',
-    points: [
-      'Individual health timelines for parents, spouse, and children',
-      'Remote booking with real-time GPS & milestone tracking',
-      'Secure digital medical records and prescription vault',
-      'Multi-city family coordination with granular consent controls',
-      'Instant post-visit summary logs sent via app & WhatsApp'
-    ],
-    faqs: [
-      { q: 'How do family members receive updates during a visit?', a: 'Authorized family members receive real-time notifications, arrival milestones, and doctor instructions via the JetPulse app and WhatsApp.' }
-    ],
-    cta: 'Explore Family Healthcare'
-  },
-  {
-    path: '/family-health-management',
-    category: 'Services',
-    title: 'Family Health Ecosystem & Centralized Care Hub | JetPulse',
-    description: 'Coordinate appointments, prescriptions, diagnostic reports, and companion updates for your entire family in one synchronized timeline.',
-    heading: 'Connected Family Health Ecosystem',
-    intro: 'Manage the healthcare journeys of parents, children, and spouses across different cities with a single private family health timeline.',
-    points: [
-      'Individual health profiles for parents, children, and spouse',
-      'Unified family calendar for upcoming appointments and diagnostics',
-      'Centralized digital medical records and report repository',
-      'One-click remote companion booking for family in other cities',
-      'Consent-based granular privacy controls for each family member'
-    ],
-    faqs: [
-      { q: 'Can siblings in different countries access our parents’ health updates?', a: 'Yes. Multiple authorized family members can log in, view live companion updates, review uploaded reports, and coordinate care.' }
-    ],
-    cta: 'Open Family Health Hub'
-  },
-  {
-    path: '/elderly-care-companion',
-    category: 'Services',
-    title: 'Elderly Care Healthcare Companion Services | JetPulse',
-    description: 'Dedicated healthcare companions for senior citizens. Gentle mobility assistance, doctor visit accompaniment, and patient listening.',
-    heading: 'Elderly Care Companion & Senior Clinic Escort',
-    intro: 'Senior family members often face fatigue, anxiety, and mobility hurdles at busy medical centers. JetPulse companions offer respectful, patient accompaniment for every medical visit.',
-    points: [
-      'Doorstep assistance and arm-support or wheelchair mobility',
-      'Patient note-taking during consultations with the doctor',
-      'Assistance with medicine purchasing and dosing instruction clarity',
-      'Comfortable transit with safe return back home',
-      'Comprehensive visit summary sent immediately to children/caregivers'
-    ],
-    faqs: [
-      { q: 'Are companions trained to handle senior patients with mobility challenges?', a: 'Yes, our companions are trained in safe walking assistance, wheelchair operation, and empathetic communication for geriatric care.' }
-    ],
-    cta: 'Book Senior Healthcare Companion'
-  },
-  {
-    path: '/bedside-assistance',
-    category: 'Services',
-    title: 'Bedside Non-Clinical Hospital Assistance | JetPulse',
-    description: 'In-hospital non-clinical bedside support for outpatients, day-care procedures, and diagnostic recovery.',
-    heading: 'Bedside & Day-Care Procedure Assistance',
-    intro: 'For minor day procedures, chemotherapy sessions, dialysis, or day-care surgeries where a loved one cannot take the day off work, JetPulse provides attentive bedside non-clinical support.',
-    points: [
-      'Attentive presence throughout day-care admission and recovery',
-      'Liaising with hospital administration for food, water, and billing',
-      'Ensuring comfort and relaying nurse calls when needed',
-      'Prescription and medicine delivery to bedside',
-      'Continuous status updates sent to designated family members'
-    ],
-    faqs: [
-      { q: 'Can a companion stay for long procedures like dialysis or chemo?', a: 'Yes, companion packages can be booked for hourly blocks (3 hrs, 6 hrs, or full day) depending on procedure duration.' }
-    ],
-    cta: 'Book Bedside Assistance'
-  },
-  {
-    path: '/how-it-works',
-    category: 'Services',
-    title: 'How JetPulse Works | 4 Simple Steps to Care Assistance',
-    description: 'Learn how JetPulse works: Tell us your healthcare need, choose a verified companion or AI Care Navigator, and get real-time family updates.',
-    heading: 'How JetPulse Works: 4 Simple Steps',
-    intro: 'Booking reliable healthcare assistance takes just a few clicks. From request to safe return home, JetPulse keeps you and your family supported every step of the way.',
-    points: [
-      'Step 1: Tell us what you need (doctor visit, lab test, hospital navigation)',
-      'Step 2: Select a verified companion or use Care Navigator AI',
-      'Step 3: Companion arrives at doorstep or healthcare center',
-      'Step 4: Receive real-time milestones and consultation summaries'
-    ],
-    faqs: [
-      { q: 'Can I book for someone else?', a: 'Yes, you can easily enter your parent or loved one’s address as pickup and manage the booking from your own device.' }
-    ],
-    cta: 'Get Assistance Now'
-  },
-
-  // ── LOCAL CITIES (INDIA LOCAL SEO) ──────────────────────────
-  {
-    path: '/cities/bangalore',
-    category: 'Cities',
-    title: 'Healthcare Companion Services in Bangalore | JetPulse',
-    description: 'Verified healthcare companion services in Bangalore. Hospital escorts, OPD navigation at Manipal, Apollo, Aster, and lab visits across Bangalore.',
-    heading: 'Healthcare Companion & Hospital Escort Services in Bangalore',
-    intro: 'Serving Koramangala, Indiranagar, Whitefield, HSR Layout, Jayanagar, Electronic City, and across Bengaluru. Get verified companions for visits to Apollo, Manipal, Fortis, Aster, and top diagnostic labs.',
-    points: [
-      'Rapid companion dispatch across East, South, and North Bangalore',
-      'Coverage for major hospitals (Manipal, Apollo, Fortis, Narayana Health)',
-      'Diagnostic visits to Anand Diagnostic, Metropolis, Dr. Lal PathLabs',
-      'Doorstep pickup and return across Bengaluru metro areas',
-      'Live GPS updates and reports shared with family'
-    ],
-    faqs: [
-      { q: 'Which areas in Bangalore are covered?', a: 'We cover Koramangala, Indiranagar, HSR, Whitefield, JP Nagar, Jayanagar, Malleshwaram, Hebbal, Electronic City, and surrounding Bengaluru areas.' }
-    ],
-    cta: 'Book Companion in Bangalore'
-  },
-  {
-    path: '/cities/varanasi',
-    category: 'Cities',
-    title: 'Healthcare Companion Services in Varanasi | JetPulse',
-    description: 'Healthcare companions in Varanasi for BHU Sir Sunderlal Hospital, Apollo Spectra, Heritage, and diagnostic visits.',
-    heading: 'Healthcare Companion & Hospital Escort Services in Varanasi',
-    intro: 'Empowering Varanasi residents and remote family members with verified, local companions. We assist with visits to IMS-BHU, Apollo Spectra, Heritage Hospitals, and local clinics.',
-    points: [
-      'Doorstep escort across Lanka, Sigra, Bhelupur, Cantt, and Mahmoorganj',
-      'OPD queue navigation at IMS BHU Sir Sunderlal Hospital',
-      'Support at Apollo Spectra, Popular Hospital, and Apex Hospital',
-      'Remote booking from Bangalore, Mumbai, or overseas for parents in Varanasi',
-      'Detailed Hindi and English visit notes sent to family'
-    ],
-    faqs: [
-      { q: 'Can I book for my parents in Varanasi while living in Bangalore?', a: 'Yes! Remote family booking for Varanasi is one of our most popular services. You receive live updates on WhatsApp and the JetPulse app.' }
-    ],
-    cta: 'Book Companion in Varanasi'
-  },
-  {
-    path: '/cities/jaipur',
-    category: 'Cities',
-    title: 'Healthcare Companion Services in Jaipur | JetPulse',
-    description: 'Verified healthcare companions in Jaipur for SMS Hospital, Fortis, Eternal Heart, Manipal Hospital, and diagnostic centers.',
-    heading: 'Healthcare Companion & Hospital Escort Services in Jaipur',
-    intro: 'Providing compassionate healthcare navigation across Jaipur including Malviya Nagar, Vaishali Nagar, Mansarovar, C-Scheme, and Tonk Road. Assistance at SMS Hospital, Fortis Escorts, and EHCC.',
-    points: [
-      'Prompt companion support across Jaipur urban and suburban zones',
-      'Assistance at SMS Hospital, Fortis, Manipal, and Eternal Hospital',
-      'Diagnostic visit coordination at SRL, Metropolis, and local scan centers',
-      'Senior citizen escort for routine checkups and follow-up care',
-      'Family dashboard integration with instant visit logs'
-    ],
-    faqs: [
-      { q: 'Do you cover SMS Hospital and private hospitals in Jaipur?', a: 'Yes, companions assist at both government institutions like SMS Hospital and private tertiary hospitals like Fortis and Manipal.' }
-    ],
-    cta: 'Book Companion in Jaipur'
-  },
-  {
-    path: '/cities/delhi-ncr',
-    category: 'Cities',
-    title: 'Healthcare Companion Services in Delhi NCR | JetPulse',
-    description: 'Healthcare companions across New Delhi, Gurgaon, and Noida. Hospital OPD navigation at AIIMS, Max Healthcare, Fortis, Medanta, and Apollo.',
-    heading: 'Healthcare Companion & Hospital Navigation in Delhi NCR',
-    intro: 'Navigating healthcare across Delhi, Gurugram, and Noida is made stress-free with JetPulse. Verified escorts for AIIMS, Max Super Speciality, Fortis Memorial, Medanta The Medicity, and Apollo Hospitals.',
-    points: [
-      'Coverage across Delhi, Gurgaon (Gurugram), and Noida / Greater Noida',
-      'Assistance at AIIMS, Medanta, Max Healthcare, Fortis, and Apollo',
-      'Diagnostic assistance at Dr Lal PathLabs, Mahajan Imaging, and Metropolis',
-      'Doorstep transit assistance and wheelchair escort',
-      'Instant digital receipts, doctor notes, and family coordination'
-    ],
-    faqs: [
-      { q: 'How do companions navigate large NCR hospital campuses?', a: 'Our Delhi NCR companions are trained with campus layouts of major hospitals like Medanta, AIIMS, and Max to minimize patient fatigue.' }
-    ],
-    cta: 'Book Companion in Delhi NCR'
-  },
-  {
-    path: '/cities/mumbai',
-    category: 'Cities',
-    title: 'Healthcare Companion Services in Mumbai | JetPulse',
-    description: 'Verified healthcare companions in Mumbai for Lilavati, Kokilaben, Tata Memorial, Hinduja, and Breach Candy hospitals.',
-    heading: 'Healthcare Companion & Hospital Escort Services in Mumbai',
-    intro: 'Seamless healthcare support across South Mumbai, Western Suburbs, and Central Mumbai. Practical assistance at Lilavati, Kokilaben Dhirubhai Ambani, Hinduja, and Tata Memorial Hospital.',
-    points: [
-      'Service across Mumbai suburbs and South Mumbai',
-      'Expert assistance with OPD tokens, paperwork, and multi-department visits',
-      'Support for cancer therapy visits, dialysis, and routine specialist consults',
-      'Doorstep pickup, cab escort, and safe return home',
-      'Synchronized family updates for working professionals'
-    ],
-    faqs: [
-      { q: 'Do you assist with specialized cancer or dialysis appointments in Mumbai?', a: 'Yes, our companions frequently support patients attending recurring day-care procedures and diagnostic checkups.' }
-    ],
-    cta: 'Book Companion in Mumbai'
-  },
-  {
-    path: '/cities/hyderabad',
-    category: 'Cities',
-    title: 'Healthcare Companion Services in Hyderabad | JetPulse',
-    description: 'Healthcare companions in Hyderabad for Apollo Jubilee Hills, Yashoda, KIMS, Care Hospitals, and diagnostic clinics.',
-    heading: 'Healthcare Companion & Hospital Escort Services in Hyderabad',
-    intro: 'Compassionate healthcare assistance across Jubilee Hills, Banjara Hills, Gachibowli, Hitec City, Secunderabad, and Kukatpally for top healthcare centers and labs.',
-    points: [
-      'Coverage across Hyderabad and Secunderabad',
-      'Assistance at Apollo Hospitals Jubilee Hills, Yashoda, KIMS, and AIG Hospitals',
-      'Diagnostics and scan escorts at Vijaya Diagnostics and Lucid Medical',
-      'Comfortable doorstep transport and patient queue navigation',
-      'Real-time status updates for family in India and NRI relatives abroad'
-    ],
-    faqs: [
-      { q: 'Can Telugu and English speaking companions be requested?', a: 'Yes, companion language preferences (Telugu, Hindi, English) can be specified during booking.' }
-    ],
-    cta: 'Book Companion in Hyderabad'
-  },
-
-  // ── TRUST, COMPANY & SUPPORT ────────────────────────────────
-  {
-    path: '/about',
-    category: 'Company',
-    title: 'About JetPulse | Intelligent Healthcare Assistance & Navigation',
-    description: 'Learn about JetPulse, our mission to ensure nobody navigates healthcare alone, and our verified companion ecosystem.',
-    heading: 'Healthcare, Handled With Care & Clarity',
-    intro: 'JetPulse was created to solve one of the most stressful parts of modern life: handling healthcare logistics alone. We combine compassionate, verified human companions with intelligent AI navigation and a unified family health ecosystem.',
-    points: [
-      'Dedicated to non-clinical care coordination and patient dignity',
-      '100% background-verified companion network with service training',
-      'AI Care Navigator designed to clarify healthcare pathways',
-      'Synchronized multi-city family health communication',
-      'Committed to transparent pricing and patient safety'
-    ],
-    faqs: [
-      { q: 'What inspired JetPulse?', a: 'JetPulse was founded to solve the struggle experienced by students living alone, busy working professionals, and remote children trying to care for elderly parents across different cities.' }
-    ],
-    cta: 'Experience JetPulse'
-  },
-  {
-    path: '/help',
-    category: 'Support',
-    title: 'Help Center & FAQs | JetPulse Support',
-    description: 'Find quick answers about companion booking, pricing, safety standards, Care Navigator, and family accounts.',
-    heading: 'JetPulse Help & Support Center',
-    intro: 'Everything you need to know about booking assistance, preparing for doctor visits, tracking journeys, and managing family health records.',
-    points: [
-      'Instant booking and scheduled reservation guidelines',
-      'Payment methods and transparent hourly pricing',
-      'Companion safety, identification, and verification protocols',
-      'AI Care Navigator troubleshooting and document uploads',
-      'Family timeline sharing and privacy management'
-    ],
-    faqs: [
-      { q: 'How do I cancel or reschedule a booking?', a: 'Bookings can be rescheduled or cancelled directly from the JetPulse dashboard up to 2 hours prior to scheduled start time.' },
-      { q: 'What happens if a doctor visit runs longer than expected?', a: 'You can easily extend the companion hours in real-time through the app with prorated pricing.' }
-    ],
-    cta: 'Contact Support'
-  },
-  {
-    path: '/faqs',
-    category: 'Support',
-    title: 'Frequently Asked Questions | JetPulse Healthcare',
-    description: 'Common questions and answers regarding JetPulse companion bookings, AI triage, emergency policies, and pricing.',
-    heading: 'Frequently Asked Questions',
-    intro: 'Get detailed clarity on how JetPulse works, companion vetting, pricing structure, and platform features.',
-    points: [
-      'Transparent hourly and multi-hour pricing packages',
-      'Strict background checks and police verification for companions',
-      'Non-clinical scope of service and emergency medical guidelines',
-      'Multi-city family coordination features',
-      'Data security and health records privacy'
-    ],
-    faqs: [
-      { q: 'Is JetPulse an emergency ambulance service?', a: 'No. JetPulse provides non-clinical assistance and scheduled/on-demand visit companions. In medical emergencies, please call local emergency services immediately (112 / 108).' }
-    ],
-    cta: 'Book Assistance Now'
-  },
-  {
-    path: '/verification',
-    category: 'Trust',
-    title: 'Companion Verification & Safety Standards | JetPulse',
-    description: 'Learn about JetPulse companion vetting, criminal background checks, identity verification, and empathy training.',
-    heading: 'Rigorous Verification & Trust Standards',
-    intro: 'Your safety, dignity, and peace of mind are our highest priorities. Every JetPulse companion goes through a comprehensive 5-step verification and training program before their first assignment.',
-    points: [
-      'Government ID and biometric identity verification (Aadhaar / PAN)',
-      'Thorough criminal background check and address verification',
-      'Professional reference verification and interview evaluation',
-      'Comprehensive training in hospital protocols, mobility, and empathy',
-      'Ongoing patient feedback and strict zero-tolerance code of conduct'
-    ],
-    cta: 'Learn More'
-  },
-  {
-    path: '/privacy',
-    category: 'Legal',
-    title: 'Privacy Policy | JetPulse Healthcare',
-    description: 'JetPulse Privacy Policy: How we collect, store, and protect your personal and health-related data.',
-    heading: 'Privacy Policy',
-    intro: 'JetPulse takes data privacy seriously. This document outlines our data collection policies, HIPAA/DISHA alignment, encryption standards, and your rights regarding your personal and family health data.',
-    points: [
-      'End-to-end encryption for health records and personal documents',
-      'Consent-driven sharing between family members',
-      'Strict no-sale policy for personal health information',
-      'Right to export or delete your health records at any time',
-      'Secure tokenized payment handling with zero card data storage'
-    ]
-  },
-  {
-    path: '/privacy-policy',
-    category: 'Legal',
-    title: 'Privacy Policy | JetPulse Healthcare',
-    description: 'JetPulse Privacy Policy: How we collect, store, and protect your personal and health-related data.',
-    heading: 'Privacy Policy',
-    intro: 'JetPulse takes data privacy seriously. This document outlines our data collection policies, HIPAA/DISHA alignment, encryption standards, and your rights regarding your personal and family health data.',
-    points: [
-      'End-to-end encryption for health records and personal documents',
-      'Consent-driven sharing between family members',
-      'Strict no-sale policy for personal health information',
-      'Right to export or delete your health records at any time',
-      'Secure tokenized payment handling with zero card data storage'
-    ]
-  },
-  {
-    path: '/terms',
-    category: 'Legal',
-    title: 'Terms of Service | JetPulse Healthcare',
-    description: 'JetPulse Terms of Service: Non-clinical scope of service, user responsibilities, and booking policies.',
-    heading: 'Terms of Service',
-    intro: 'These terms outline the legal terms of service between JetPulse Technologies Inc. and users of our mobile/web application, AI Care Navigator, and companion escort services.',
-    points: [
-      'Non-clinical assistance definition and emergency disclaimers',
-      'Booking cancellation, refund, and extension policies',
-      'User conduct expectations and mutual respect guidelines',
-      'Intellectual property and platform usage rights',
-      'Limitation of liability and dispute resolution'
-    ]
-  },
-  {
-    path: '/accessibility',
-    category: 'Trust',
-    title: 'Accessibility Statement | JetPulse Healthcare',
-    description: 'JetPulse commitment to digital and physical accessibility for elderly patients and individuals with disabilities.',
-    heading: 'Accessibility Commitment',
-    intro: 'Healthcare should be accessible to all. JetPulse is committed to WCAG 2.1 AA accessibility standards across our digital platforms and physically accommodating companions.',
-    points: [
-      'High contrast ratios and readable typography for senior eyes',
-      'Full keyboard navigability and screen-reader compatibility (ARIA)',
-      'Audio and visual options in Care Navigator AI',
-      'Specialized companion training for wheelchair and low-vision assistance',
-      'Dedicated accessibility feedback and assistance line'
-    ]
-  }
-];
+// Import SEO Configuration
+const { SEO_PAGES, NOINDEX_ROUTES, generatePageSchema } = await import('../src/seo/seoConfig.js');
 
 function escapeHtml(value) {
   if (!value) return '';
-  return String(value).replace(/[&<>"']/g, (c) => ({
+  return String(value).replace(/[&<>"']/g, (character) => ({
     '&': '&amp;',
     '<': '&lt;',
     '>': '&gt;',
     '"': '&quot;',
-    "'": '&#39;'
-  }[c]));
+    "'": '&#39;',
+  }[character]));
 }
 
-function renderBreadcrumbs(page) {
-  const isCity = page.path.startsWith('/cities/');
-  const parentName = isCity ? 'Cities' : (page.category || 'Services');
-  const parentUrl = isCity ? '/#cities' : '/#services';
-  
-  return `
-    <nav aria-label="Breadcrumb" class="seo-breadcrumb" style="margin-bottom: 24px;">
-      <ol style="display: flex; gap: 8px; list-style: none; padding: 0; margin: 0; font-size: 13px; color: #64748b; align-items: center; flex-wrap: wrap;">
-        <li><a href="/" style="color: #0F9F96; text-decoration: none; font-weight: 600;">Home</a></li>
-        <li style="color: #cbd5e1;">/</li>
-        <li><span style="color: #64748b;">${escapeHtml(parentName)}</span></li>
-        <li style="color: #cbd5e1;">/</li>
-        <li aria-current="page" style="color: #082B4C; font-weight: 600;">${escapeHtml(page.heading.split(' ')[0])}</li>
-      </ol>
-    </nav>
-  `;
-}
+const RELATED_SERVICES = [
+  { href: '/healthcare-companion', label: 'Healthcare Companion' },
+  { href: '/doctor-visit-assistance', label: 'Doctor Visit Assistance' },
+  { href: '/diagnostic-test-assistance', label: 'Diagnostic Tests' },
+  { href: '/hospital-visit-assistance', label: 'Hospital Navigation' },
+  { href: '/post-discharge-care', label: 'Post-Discharge Care' },
+  { href: '/family-healthcare', label: 'Family Healthcare' },
+  { href: '/care-navigator', label: 'Care Navigator AI' },
+];
 
-function renderStaticContent(page) {
-  const pointsHtml = page.points
-    ? `<section class="seo-page-section" aria-labelledby="service-includes-heading">
-        <h2 id="service-includes-heading">Key Features & Inclusions</h2>
-        <ul class="seo-page-list">
-          ${page.points.map((pt) => `<li><span aria-hidden="true" style="color:#0F9F96; font-weight:bold; margin-right:8px;">✓</span> ${escapeHtml(pt)}</li>`).join('')}
-        </ul>
-      </section>`
+const CITY_LINKS = [
+  { href: '/cities/bangalore', label: 'Bangalore' },
+  { href: '/cities/varanasi', label: 'Varanasi' },
+  { href: '/cities/jaipur', label: 'Jaipur' },
+];
+
+function staticContent(page) {
+  const isTrustPage = page.category === 'trust';
+  const isLocationPage = page.category === 'location';
+
+  // Breadcrumbs HTML
+  const breadcrumbsHtml = page.breadcrumbs && page.breadcrumbs.length > 0
+    ? `<nav aria-label="Breadcrumb" style="margin-bottom:20px;"><ol style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:0;font-size:13px;color:#64748b;">${page.breadcrumbs.map((crumb, idx) => {
+        const isLast = idx === page.breadcrumbs.length - 1;
+        const separator = idx > 0 ? '<span style="color:#cbd5e1;" aria-hidden="true">›</span>' : '';
+        return `<li style="display:flex;align-items:center;gap:8px;">${separator}${isLast ? `<span style="color:#0F9F96;font-weight:600;" aria-current="page">${escapeHtml(crumb.name)}</span>` : `<a href="${crumb.url}" style="color:#64748b;text-decoration:none;">${escapeHtml(crumb.name)}</a>`}</li>`;
+      }).join('')}</ol></nav>`
     : '';
 
+  // Service Points
+  const pointsHtml = page.points && page.points.length > 0
+    ? `<section class="seo-page-section" aria-labelledby="service-features-heading" style="margin-bottom:40px;"><h2 id="service-features-heading" style="font-size:22px;font-weight:800;color:#041B32;margin-bottom:18px;">What this service includes</h2><ul class="seo-page-list" style="list-style:none;padding:0;margin:0;">${page.points.map((pt) => `<li style="display:flex;align-items:flex-start;gap:12px;font-size:15px;color:#041B32;line-height:1.5;margin-bottom:14px;"><span style="color:#0F9F96;font-weight:bold;" aria-hidden="true">✓</span> <span>${escapeHtml(pt)}</span></li>`).join('')}</ul></section>`
+    : '';
+
+  // How it helps
+  const howItHelpsHtml = page.howItHelps && page.howItHelps.length > 0
+    ? `<section class="seo-page-section" aria-labelledby="how-it-helps-heading" style="margin-bottom:40px;"><h2 id="how-it-helps-heading" style="font-size:22px;font-weight:800;color:#041B32;margin-bottom:18px;">Who benefits most from this support</h2><div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:16px;">${page.howItHelps.map((c) => `<div class="jp-card" style="padding:20px;border-radius:14px;border:1px solid #e2e8f0;background:#ffffff;"><h3 style="font-size:16px;font-weight:700;color:#041B32;margin-bottom:8px;">${escapeHtml(c.title)}</h3><p style="font-size:13px;color:#64748b;line-height:1.5;margin:0;">${escapeHtml(c.desc)}</p></div>`).join('')}</div></section>`
+    : '';
+
+  // FAQs Accordion
   const faqsHtml = page.faqs && page.faqs.length > 0
-    ? `<section class="seo-page-section seo-faqs-section" aria-labelledby="faqs-heading" style="margin-top: 36px;">
-        <h2 id="faqs-heading">Frequently Asked Questions</h2>
-        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 16px;">
-          ${page.faqs.map((faq) => `
-            <details style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 16px; font-size: 14px; cursor: pointer;">
-              <summary style="font-weight: 700; color: #082B4C; font-size: 15px; outline: none;">${escapeHtml(faq.q)}</summary>
-              <p style="margin-top: 10px; color: #475569; line-height: 1.6; margin-bottom: 0;">${escapeHtml(faq.a)}</p>
-            </details>
-          `).join('')}
-        </div>
-      </section>`
+    ? `<section class="seo-page-section" aria-labelledby="faqs-heading" style="margin-bottom:40px;"><h2 id="faqs-heading" style="font-size:22px;font-weight:800;color:#041B32;margin-bottom:18px;">Frequently Asked Questions</h2><div style="display:flex;flex-direction:column;gap:12px;">${page.faqs.map((f) => `<details style="border:1px solid #e2e8f0;border-radius:12px;background:#ffffff;padding:16px 20px;cursor:pointer;"><summary style="font-weight:700;font-size:15px;color:#041B32;">${escapeHtml(f.question)}</summary><div style="padding-top:12px;margin-top:10px;border-top:1px solid #f1f5f9;font-size:14px;color:#64748b;line-height:1.6;">${escapeHtml(f.answer)}</div></details>`).join('')}</div></section>`
     : '';
 
-  const isLegalOrTrust = ['Legal', 'Trust'].includes(page.category);
-  const trustNotice = isLegalOrTrust
-    ? `<section class="seo-page-section" style="margin-top: 24px;">
-        <h2>Important Healthcare Notice</h2>
-        <p>JetPulse provides non-clinical healthcare assistance, mobility escorts, and navigation support. For acute emergencies, dial local emergency services (112/108) immediately.</p>
-      </section>`
+  // Disclaimer
+  const disclaimerHtml = `<section class="seo-page-section" style="padding:18px 20px;border-radius:14px;background:#F3FAFB;border:1px solid #D2EFF3;margin-bottom:36px;"><h3 style="font-size:13px;font-weight:700;color:#041B32;margin-bottom:4px;">Non-Clinical Healthcare Notice &amp; Emergency Guidelines</h3><p style="font-size:12px;color:#64748b;line-height:1.5;margin:0;">JetPulse companions provide non-clinical escort, mobility, and administrative navigation support. JetPulse does not diagnose conditions, prescribe medications, or replace emergency medical services. In an emergency, please dial <strong>112 / 108</strong>.</p></section>`;
+
+  // CTA
+  const ctaHtml = !isTrustPage
+    ? `<div style="margin-bottom:48px;display:flex;gap:14px;flex-wrap:wrap;"><a class="jp-btn jp-btn-primary jp-btn-lg" href="/#booking">${escapeHtml(page.cta || 'Get Assistance Now')}</a><a class="jp-btn jp-btn-secondary jp-btn-lg" href="/care-navigator">Explore Care Navigator AI</a></div>`
     : '';
 
-  const ctaBtn = !isLegalOrTrust
-    ? `<div style="margin: 32px 0;">
-        <a class="jp-btn jp-btn-primary jp-btn-lg" href="/#booking" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
-          <span>${escapeHtml(page.cta || 'Get Assistance Now')}</span> →
-        </a>
-      </div>`
-    : '';
+  // Internal link footer
+  const internalFooterHtml = `<footer style="border-top:1px solid #e2e8f0;padding-top:32px;margin-top:20px;"><div style="margin-bottom:24px;"><h3 style="font-size:13px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:12px;">Explore Related Healthcare Services</h3><div style="display:flex;flex-wrap:wrap;gap:8px;">${RELATED_SERVICES.map((s) => `<a href="${s.href}" style="font-size:13px;padding:6px 12px;border-radius:8px;background:#f8fafc;border:1px solid #e2e8f0;color:#041B32;text-decoration:none;">${escapeHtml(s.label)}</a>`).join('')}</div></div><div><h3 style="font-size:13px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:12px;">Service Hubs in India</h3><div style="display:flex;flex-wrap:wrap;gap:8px;">${CITY_LINKS.map((c) => `<a href="${c.href}" style="font-size:13px;padding:6px 14px;border-radius:8px;background:#EAF8F6;border:1px solid rgba(15,159,150,0.2);color:#0F9F96;text-decoration:none;font-weight:600;">${escapeHtml(c.label)}</a>`).join('')}</div></div></footer>`;
 
-  // Interlinking to related services & cities
-  const interlinkHtml = `
-    <section class="seo-page-section seo-page-interlinks" style="margin-top: 48px; padding-top: 32px; border-top: 1px solid #E2E8F0;">
-      <h3 style="font-size: 18px; color: #082B4C; margin-bottom: 16px;">Explore JetPulse Healthcare Services</h3>
-      <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px;">
-        <a href="/healthcare-companion" style="font-size: 13px; color: #082B4C; background: #F1F5F9; padding: 6px 12px; border-radius: 8px; text-decoration: none;">Healthcare Companion</a>
-        <a href="/doctor-visit-assistance" style="font-size: 13px; color: #082B4C; background: #F1F5F9; padding: 6px 12px; border-radius: 8px; text-decoration: none;">Doctor Visit Assistance</a>
-        <a href="/hospital-navigation" style="font-size: 13px; color: #082B4C; background: #F1F5F9; padding: 6px 12px; border-radius: 8px; text-decoration: none;">Hospital Navigation</a>
-        <a href="/diagnostic-test-assistance" style="font-size: 13px; color: #082B4C; background: #F1F5F9; padding: 6px 12px; border-radius: 8px; text-decoration: none;">Diagnostic Support</a>
-        <a href="/post-discharge-care" style="font-size: 13px; color: #082B4C; background: #F1F5F9; padding: 6px 12px; border-radius: 8px; text-decoration: none;">Post-Discharge Care</a>
-        <a href="/care-navigator" style="font-size: 13px; color: #082B4C; background: #F1F5F9; padding: 6px 12px; border-radius: 8px; text-decoration: none;">AI Care Navigator</a>
-        <a href="/family-healthcare" style="font-size: 13px; color: #082B4C; background: #F1F5F9; padding: 6px 12px; border-radius: 8px; text-decoration: none;">Family Healthcare</a>
-        <a href="/elderly-care-companion" style="font-size: 13px; color: #082B4C; background: #F1F5F9; padding: 6px 12px; border-radius: 8px; text-decoration: none;">Elderly Care Companion</a>
-        <a href="/bedside-assistance" style="font-size: 13px; color: #082B4C; background: #F1F5F9; padding: 6px 12px; border-radius: 8px; text-decoration: none;">Bedside Assistance</a>
-      </div>
-      <h3 style="font-size: 18px; color: #082B4C; margin-bottom: 16px;">Service Locations in India</h3>
-      <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-        <a href="/cities/bangalore" style="font-size: 13px; color: #082B4C; background: #F1F5F9; padding: 6px 12px; border-radius: 8px; text-decoration: none;">Bangalore</a>
-        <a href="/cities/varanasi" style="font-size: 13px; color: #082B4C; background: #F1F5F9; padding: 6px 12px; border-radius: 8px; text-decoration: none;">Varanasi</a>
-        <a href="/cities/jaipur" style="font-size: 13px; color: #082B4C; background: #F1F5F9; padding: 6px 12px; border-radius: 8px; text-decoration: none;">Jaipur</a>
-        <a href="/cities/delhi-ncr" style="font-size: 13px; color: #082B4C; background: #F1F5F9; padding: 6px 12px; border-radius: 8px; text-decoration: none;">Delhi NCR</a>
-        <a href="/cities/mumbai" style="font-size: 13px; color: #082B4C; background: #F1F5F9; padding: 6px 12px; border-radius: 8px; text-decoration: none;">Mumbai</a>
-        <a href="/cities/hyderabad" style="font-size: 13px; color: #082B4C; background: #F1F5F9; padding: 6px 12px; border-radius: 8px; text-decoration: none;">Hyderabad</a>
-      </div>
-    </section>
-  `;
-
-  return `
-    <div class="seo-page-shell">
-      <header class="seo-page-header">
-        <div class="jp-container seo-page-header-inner" style="display: flex; align-items: center; justify-content: space-between; padding: 18px 0;">
-          <a class="seo-back-link" href="/" style="font-weight: 800; font-size: 20px; color: #082B4C; text-decoration: none; display: flex; align-items: center; gap: 6px;">
-            <span style="color: #0F9F96;">←</span> JetPulse
-          </a>
-          ${!isLegalOrTrust ? `<a class="jp-btn jp-btn-primary jp-btn-sm" href="/#booking" style="text-decoration: none;">Get Assistance</a>` : ''}
-        </div>
-      </header>
-      <main class="seo-page-main" style="padding: 40px 0 80px 0;">
-        <div class="jp-container seo-page-content" style="max-width: 840px; margin: 0 auto;">
-          ${renderBreadcrumbs(page)}
-          <div class="seo-page-eyebrow" style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; text-transform: uppercase; color: #0F9F96; background: #EAF8F6; padding: 4px 10px; border-radius: 6px; margin-bottom: 16px;">
-            JetPulse Healthcare Support • ${escapeHtml(page.category || 'Service')}
-          </div>
-          <h1 style="font-size: 34px; font-weight: 800; color: #082B4C; line-height: 1.25; margin-bottom: 16px;">${escapeHtml(page.heading)}</h1>
-          <p class="seo-page-intro" style="font-size: 17px; color: #475569; line-height: 1.6; margin-bottom: 32px;">${escapeHtml(page.intro)}</p>
-          ${pointsHtml}
-          ${ctaBtn}
-          ${faqsHtml}
-          ${trustNotice}
-          ${interlinkHtml}
-        </div>
-      </main>
-    </div>
-  `;
-}
-
-function buildPageSchema(page) {
-  const canonical = `${siteUrl}${page.path}`;
-  const isCity = page.path.startsWith('/cities/');
-  const cityName = isCity ? page.heading.split('in ').pop()?.trim() : null;
-
-  const breadcrumbsSchema = {
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
-      { '@type': 'ListItem', position: 2, name: isCity ? 'Cities' : (page.category || 'Services'), item: `${siteUrl}/#${isCity ? 'cities' : 'services'}` },
-      { '@type': 'ListItem', position: 3, name: page.heading, item: canonical }
-    ]
-  };
-
-  const schemas = [breadcrumbsSchema];
-
-  if (isCity) {
-    schemas.push({
-      '@type': ['LocalBusiness', 'MedicalBusiness'],
-      '@id': `${canonical}#business`,
-      name: `JetPulse Healthcare Companion - ${cityName}`,
-      description: page.description,
-      url: canonical,
-      image: `${siteUrl}/og-image.png`,
-      priceRange: '₹₹',
-      areaServed: { '@type': 'City', name: cityName },
-      provider: { '@type': 'Organization', name: 'JetPulse', url: siteUrl }
-    });
-  } else if (page.points) {
-    schemas.push({
-      '@type': 'Service',
-      '@id': `${canonical}#service`,
-      name: page.title,
-      description: page.description,
-      url: canonical,
-      provider: { '@type': 'Organization', name: 'JetPulse', url: siteUrl },
-      serviceType: page.category || 'Healthcare Support',
-      areaServed: { '@type': 'Country', name: 'India' }
-    });
-  }
-
-  if (page.faqs && page.faqs.length > 0) {
-    schemas.push({
-      '@type': 'FAQPage',
-      '@id': `${canonical}#faqs`,
-      mainEntity: page.faqs.map((faq) => ({
-        '@type': 'Question',
-        name: faq.q,
-        acceptedAnswer: { '@type': 'Answer', text: faq.a }
-      }))
-    });
-  }
-
-  return {
-    '@context': 'https://schema.org',
-    '@graph': schemas
-  };
+  return `<div class="seo-page-shell" style="min-height:100vh;display:flex;flex-direction:column;"><header class="seo-page-header"><div class="jp-container seo-page-header-inner"><a class="seo-back-link" href="/" style="text-decoration:none;font-weight:800;font-size:20px;color:#041B32;">JetPulse</a><div style="display:flex;align-items:center;gap:12px;"><a href="/faq" style="font-size:14px;font-weight:600;color:#041B32;text-decoration:none;">FAQ</a>${!isTrustPage ? '<a class="jp-btn jp-btn-primary jp-btn-sm" href="/#booking">Get Assistance</a>' : ''}</div></div></header><main class="seo-page-main" style="flex:1;"><article class="jp-container seo-page-content">${breadcrumbsHtml}<div class="seo-page-eyebrow" style="margin-bottom:12px;color:#0F9F96;font-weight:700;font-size:14px;">${isLocationPage ? 'JetPulse City Service Hub' : isTrustPage ? 'JetPulse Trust & Safety Protocol' : 'Verified Healthcare Logistical Support'}</div><h1 style="font-size:clamp(28px, 4vw, 42px);font-weight:800;color:#041B32;line-height:1.25;margin-bottom:16px;">${escapeHtml(page.h1 || page.title)}</h1><p class="seo-page-intro" style="font-size:18px;color:#64748b;line-height:1.6;margin-bottom:36px;max-width:720px;">${escapeHtml(page.intro)}</p>${pointsHtml}${howItHelpsHtml}${faqsHtml}${disclaimerHtml}${ctaHtml}${internalFooterHtml}</article></main></div>`;
 }
 
 function pageHtml(template, page) {
-  const canonical = `${siteUrl}${page.path}`;
-  const schema = JSON.stringify(buildPageSchema(page));
+  const canonical = `${siteUrl}${page.path === '/' ? '' : page.path}`;
+  const schema = JSON.stringify(generatePageSchema(page));
 
-  let html = template
+  let output = template
     .replace(/<title>[^<]*<\/title>/, `<title>${escapeHtml(page.title)}</title>`)
     .replace(/<meta\s+name="description"\s+content="[^"]*"\s*\/>/s, `<meta name="description" content="${escapeHtml(page.description)}" />`)
     .replace(/<link rel="canonical" href="[^"]*"\s*\/>/, `<link rel="canonical" href="${canonical}" />`)
@@ -690,54 +92,71 @@ function pageHtml(template, page) {
     .replace(/<meta property="og:description"\s+content="[^"]*"\s*\/>/s, `<meta property="og:description" content="${escapeHtml(page.description)}" />`)
     .replace(/<meta property="og:url" content="[^"]*"\s*\/>/, `<meta property="og:url" content="${canonical}" />`)
     .replace(/<meta name="twitter:title" content="[^"]*"\s*\/>/, `<meta name="twitter:title" content="${escapeHtml(page.title)}" />`)
-    .replace(/<meta name="twitter:description"\s+content="[^"]*"\s*\/>/s, `<meta name="twitter:description" content="${escapeHtml(page.description)}" />`)
-    .replace('<div id="root"></div>', renderStaticContent(page))
-    .replace('</head>', `<script type="application/ld+json">${schema}</script></head>`);
+    .replace(/<meta name="twitter:description"\s+content="[^"]*"\s*\/>/s, `<meta name="twitter:description" content="${escapeHtml(page.description)}" />`);
 
-  return html;
+  if (page.path !== '/') {
+    output = output
+      .replace('<div id="root"></div>', `<div id="root">${staticContent(page)}</div>`)
+      .replace('</head>', `<script id="jetpulse-page-schema" type="application/ld+json">${schema}</script></head>`);
+  }
+
+  return output;
 }
 
-function render404Html(template) {
-  const content = `
-    <div class="seo-page-shell" style="min-height: 100vh; background-color: #F8FAFC; display: flex; flex-direction: column;">
-      <header class="seo-page-header" style="background-color: rgba(255, 255, 255, 0.95); border-bottom: 1px solid #E2E8F0; padding: 16px 0;">
-        <div class="jp-container" style="display: flex; align-items: center; justify-content: space-between;">
-          <a href="/" style="display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 800; color: #082B4C; text-decoration: none;">
-            <span style="color: #0F9F96;">←</span> JetPulse
-          </a>
-          <a class="jp-btn jp-btn-primary jp-btn-sm" href="/#booking" style="text-decoration: none;">Get Assistance</a>
-        </div>
-      </header>
-      <main class="seo-page-main" style="flex: 1; padding: 60px 0 80px 0;">
-        <div class="jp-container" style="max-width: 800px; margin: 0 auto; textAlign: center;">
-          <div style="display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 24px; background-color: #EAF8F6; color: #0F9F96; font-size: 32px; font-weight: 900; margin-bottom: 24px;">404</div>
-          <h1 style="font-size: 32px; font-weight: 800; color: #082B4C; margin-bottom: 16px;">We couldn't find the page you're looking for.</h1>
-          <p style="font-size: 16px; color: #64748B; max-width: 560px; margin: 0 auto 36px auto; line-height: 1.6;">The link you followed may be broken or the page may have been moved.</p>
-          <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 48px;">
-            <a href="/" class="jp-btn jp-btn-primary jp-btn-lg" style="text-decoration: none;">Back to Homepage</a>
-            <a href="/#navigator" class="jp-btn jp-btn-secondary jp-btn-lg" style="text-decoration: none;">Explore Care Navigator</a>
-          </div>
-        </div>
-      </main>
-    </div>
-  `;
+// Generate Sitemap XML
+function generateSitemapXml() {
+  const today = new Date().toISOString().split('T')[0];
+  const urlNodes = Object.values(SEO_PAGES).map((p) => {
+    const loc = `${siteUrl}${p.path === '/' ? '/' : p.path}`;
+    const priority = p.priority || '0.8';
+    const changefreq = p.changefreq || 'monthly';
+    return `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>${changefreq}</changefreq>\n    <priority>${priority}</priority>\n  </url>`;
+  }).join('\n');
 
-  return template
-    .replace(/<title>[^<]*<\/title>/, `<title>404: Page Not Found | JetPulse Healthcare</title>`)
-    .replace(/<meta\s+name="robots"\s+content="[^"]*"\s*\/>/s, `<meta name="robots" content="noindex, follow" />`)
-    .replace('<div id="root"></div>', content);
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urlNodes}\n</urlset>\n`;
 }
 
-const template = await fs.readFile(path.join(distRoot, 'index.html'), 'utf8');
-
-// 1. Generate all SEO static pages
-for (const page of pages) {
-  const outputDirectory = path.join(distRoot, page.path.slice(1));
-  await fs.mkdir(outputDirectory, { recursive: true });
-  await fs.writeFile(path.join(outputDirectory, 'index.html'), pageHtml(template, page), 'utf8');
+// Generate Robots TXT
+function generateRobotsTxt() {
+  const disallows = NOINDEX_ROUTES.map((route) => `Disallow: ${route}`).join('\n');
+  return `User-agent: *\nAllow: /\n${disallows}\nDisallow: /api/\n\nSitemap: ${siteUrl}/sitemap.xml\n`;
 }
 
-// 2. Generate 404.html
-await fs.writeFile(path.join(distRoot, '404.html'), render404Html(template), 'utf8');
+// Execute Build Prerendering
+async function build() {
+  const template = await fs.readFile(path.join(distRoot, 'index.html'), 'utf8');
+  let count = 0;
 
-console.log(`Successfully prerendered ${pages.length} high-intent SEO pages + 404.html with Schema.org JSON-LD and semantic HTML.`);
+  for (const [routePath, page] of Object.entries(SEO_PAGES)) {
+    if (routePath === '/') {
+      // Overwrite dist/index.html with optimized homepage
+      await fs.writeFile(path.join(distRoot, 'index.html'), pageHtml(template, page), 'utf8');
+      count++;
+      continue;
+    }
+
+    const outputDir = path.join(distRoot, routePath.slice(1));
+    await fs.mkdir(outputDir, { recursive: true });
+    await fs.writeFile(path.join(outputDir, 'index.html'), pageHtml(template, page), 'utf8');
+    count++;
+  }
+
+  // Write Sitemap & Robots to dist/ and public/
+  const sitemapContent = generateSitemapXml();
+  const robotsContent = generateRobotsTxt();
+
+  await fs.writeFile(path.join(distRoot, 'sitemap.xml'), sitemapContent, 'utf8');
+  await fs.writeFile(path.join(publicRoot, 'sitemap.xml'), sitemapContent, 'utf8');
+
+  await fs.writeFile(path.join(distRoot, 'robots.txt'), robotsContent, 'utf8');
+  await fs.writeFile(path.join(publicRoot, 'robots.txt'), robotsContent, 'utf8');
+
+  console.log(`✅ Prerendered ${count} static SEO pages.`);
+  console.log(`✅ Generated sitemap.xml with ${Object.keys(SEO_PAGES).length} public indexable URLs.`);
+  console.log(`✅ Generated robots.txt with ${NOINDEX_ROUTES.length} protected private routes.`);
+}
+
+build().catch((err) => {
+  console.error('❌ Error during SEO prerendering:', err);
+  process.exit(1);
+});
