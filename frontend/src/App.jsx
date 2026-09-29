@@ -258,7 +258,7 @@ export default function App() {
             marginBottom: '1.5rem',
             lineHeight: 1.6,
           }}>
-            We are meticulously crafting a premier healthcare platform. Join our professional network to secure priority access upon launch.
+            We are planning to launch a revolutionary startup in healthcare. Stay tuned for updates as we build the future. Join our professional network to secure priority access upon launch.
           </p>
 
           <div style={{ height: '1px', backgroundColor: '#e2e8f0', width: '100%', marginBottom: '1.5rem' }}></div>
