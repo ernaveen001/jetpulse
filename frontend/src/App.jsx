@@ -231,69 +231,23 @@ export default function App() {
   };
 
   return (
-    <div style={{
-      height: '100vh',
-      overflow: 'hidden',
-      width: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-      backgroundColor: '#fbfcfd',
-      fontFamily: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-      color: '#1e293b'
-    }}>
+    <div className="app-container">
       {/* Professional Navigation */}
-      <nav style={{
-        width: '100%',
-        height: '72px',
-        backgroundColor: '#ffffff',
-        borderBottom: '1px solid #e2e8f0',
-        display: 'flex',
-        alignItems: 'center',
-        padding: '0 5%',
-        position: 'sticky',
-        top: 0,
-        zIndex: 50
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <img src="/logo.png" alt="JetPulse Logo" style={{ height: '32px', width: 'auto' }} />
-          <span style={{ fontSize: '1.25rem', fontWeight: '700', color: '#0F172A', letterSpacing: '-0.01em' }}>
+      <nav className="nav-header">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div className="logo-wrapper">
+            <img src="/logo.png" alt="JetPulse Logo" />
+          </div>
+          <span style={{ fontSize: '1.25rem', fontWeight: '700', color: '#123B5D', letterSpacing: '-0.01em' }}>
             JetPulse
           </span>
         </div>
       </nav>
 
       {/* Main Content Area */}
-      <main style={{
-        flex: 1,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '2rem 1rem',
-      }}>
-        <div style={{
-          backgroundColor: '#ffffff',
-          padding: '2rem 2.5rem',
-          borderRadius: '8px',
-          boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
-          maxWidth: '560px',
-          width: '100%',
-          border: '1px solid #e2e8f0',
-          textAlign: 'center'
-        }}>
-
-
-
-          <h1 style={{
-            fontSize: '2.5rem',
-            fontWeight: '800',
-            marginBottom: '1rem',
-            background: 'linear-gradient(to right, #0F9F96, #42E3DB)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            lineHeight: 1.2,
-            letterSpacing: '-0.02em'
-          }}>
+      <main className="main-content">
+        <div className="registration-card">
+          <h1 className="card-heading">
             Day 101 Building
           </h1>
 
@@ -301,8 +255,8 @@ export default function App() {
             fontSize: '1rem',
             fontWeight: '400',
             color: '#64748b',
-            marginBottom: '1rem',
-            lineHeight: 1.5,
+            marginBottom: '1.5rem',
+            lineHeight: 1.6,
           }}>
             We are meticulously crafting a premier healthcare platform. Join our professional network to secure priority access upon launch.
           </p>
@@ -311,68 +265,44 @@ export default function App() {
 
           {/* Registration Form */}
           {!submitted ? (
-            <form onSubmit={handleSubmit} style={{ textAlign: 'left' }}>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '600', color: '#334155', marginBottom: '0.5rem' }}>
+            <form onSubmit={handleSubmit} style={{ textAlign: 'left', width: '100%' }}>
+              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '600', color: '#123B5D', marginBottom: '0.5rem' }}>
                 Corporate or Personal Email
               </label>
-              <div style={{ display: 'flex', gap: '0.5rem' }}>
+              <div className="form-container">
                 <input
                   type="email"
                   required
                   placeholder="name@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  style={{
-                    flex: 1,
-                    padding: '0.75rem 1rem',
-                    borderRadius: '6px',
-                    border: '1px solid #cbd5e1',
-                    fontSize: '0.875rem',
-                    outline: 'none',
-                    transition: 'border-color 0.2s',
-                    backgroundColor: '#f8fafc'
-                  }}
-                  onFocus={(e) => { e.target.style.borderColor = '#0F9F96'; e.target.style.backgroundColor = '#ffffff'; }}
-                  onBlur={(e) => { e.target.style.borderColor = '#cbd5e1'; e.target.style.backgroundColor = '#f8fafc'; }}
+                  className="email-input"
+                  aria-label="Email Address"
                 />
-                <button type="submit" style={{
-                  padding: '0.75rem 1.5rem',
-                  borderRadius: '6px',
-                  border: 'none',
-                  background: 'linear-gradient(to right, #0F9F96, #14B8A6)',
-                  color: 'white',
-                  fontSize: '0.875rem',
-                  fontWeight: '600',
-                  cursor: 'pointer',
-                  transition: 'opacity 0.2s, transform 0.1s',
-                  boxShadow: '0 4px 10px rgba(15, 159, 150, 0.3)'
-                }}
-                  onMouseOver={(e) => { e.currentTarget.style.opacity = '0.9'; }}
-                  onMouseOut={(e) => { e.currentTarget.style.opacity = '1'; }}
-                  onMouseDown={(e) => { e.currentTarget.style.transform = 'scale(0.98)'; }}
-                  onMouseUp={(e) => { e.currentTarget.style.transform = 'scale(1)'; }}
-                >
+                <button type="submit" className="submit-btn">
                   Request Access
                 </button>
               </div>
-              <p style={{ fontSize: '0.75rem', color: '#94a3b8', marginTop: '0.75rem', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                <CheckCircle size={12} color="#0F9F96" /> Early registration guarantees an invitation to the closed beta.
+              <p style={{ fontSize: '0.8rem', color: '#64748b', marginTop: '0.875rem', display: 'flex', alignItems: 'flex-start', gap: '6px', lineHeight: 1.4 }}>
+                <CheckCircle size={14} color="#0F766E" style={{ flexShrink: 0, marginTop: '2px' }} /> 
+                <span>Early registration guarantees an invitation to the closed beta.</span>
               </p>
             </form>
           ) : (
             <div style={{
               padding: '1.5rem',
-              backgroundColor: '#f0fdf4',
-              border: '1px solid #bbf7d0',
-              borderRadius: '6px',
-              color: '#166534',
-              fontSize: '0.875rem',
+              backgroundColor: '#DDF5EF',
+              border: '1px solid #14B8A6',
+              borderRadius: '8px',
+              color: '#0F766E',
+              fontSize: '0.95rem',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '8px'
+              gap: '8px',
+              fontWeight: '500'
             }}>
-              <CheckCircle size={18} />
+              <CheckCircle size={20} />
               Registration received. We will contact you shortly.
             </div>
           )}
@@ -381,64 +311,180 @@ export default function App() {
       </main>
 
       {/* Professional Footer */}
-      <footer style={{
-        backgroundColor: '#e6f4f1',
-        borderTop: '1px solid #d1e8e2',
-        padding: '1.5rem 5%',
-        textAlign: 'center',
-        marginTop: 'auto'
-      }}>
-        <h3 style={{ fontSize: '1.1rem', color: '#1e293b', marginBottom: '1rem', fontWeight: '700' }}>
+      <footer className="footer-section">
+        <h3 style={{ fontSize: '1.1rem', color: '#123B5D', marginBottom: '1.25rem', fontWeight: '700' }}>
           Follow our Journey & Stay Tuned
         </h3>
 
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', marginBottom: '1rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', marginBottom: '1.5rem' }}>
           {[
-            { icon: Linkedin, link: 'https://www.linkedin.com/company/jetpulsein/' },
-            { icon: Instagram, link: 'https://www.instagram.com/jetpulsecare/' },
-            { icon: Mail, link: 'mailto:jetpulsein@gmail.com' }
+            { icon: Linkedin, link: 'https://www.linkedin.com/company/jetpulsein/', label: 'LinkedIn' },
+            { icon: Instagram, link: 'https://www.instagram.com/jetpulsecare/', label: 'Instagram' },
+            { icon: Mail, link: 'mailto:jetpulsein@gmail.com', label: 'Email' }
           ].map((social, idx) => (
-            <a key={idx} href={social.link} target="_blank" rel="noreferrer" style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '40px',
-              height: '40px',
-              backgroundColor: '#f1f5f9',
-              borderRadius: '50%',
-              color: '#0F9F96',
-              transition: 'all 0.2s',
-              cursor: 'pointer'
-            }}
-              onMouseOver={(e) => { e.currentTarget.style.backgroundColor = '#0F9F96'; e.currentTarget.style.color = '#fff'; }}
-              onMouseOut={(e) => { e.currentTarget.style.backgroundColor = '#f1f5f9'; e.currentTarget.style.color = '#0F9F96'; }}
-            >
-              <social.icon size={20} />
+            <a key={idx} href={social.link} target="_blank" rel="noreferrer" className="social-icon" aria-label={social.label}>
+              <social.icon size={22} />
             </a>
           ))}
         </div>
 
-        <p style={{ color: '#94a3b8', fontSize: '0.8rem' }}>
+        <p style={{ color: '#64748b', fontSize: '0.85rem' }}>
           &copy; {new Date().getFullYear()} JetPulse Healthcare. All rights reserved.
         </p>
       </footer>
 
       <style>
         {`
-          * {
-            box-sizing: border-box;
-          }
+          * { box-sizing: border-box; }
           body {
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
+            font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #fbfcfd;
+            color: #1e293b;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
           }
+          .app-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            overflow-x: hidden;
+          }
+          .nav-header {
+            width: 100%;
+            height: 72px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+          }
+          .logo-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            padding: 4px;
+            flex-shrink: 0;
+          }
+          .logo-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+          }
+          .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.25rem;
+            width: 100%;
+          }
+          .registration-card {
+            background-color: #ffffff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+            max-width: 560px;
+            width: 100%;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+          }
+          .card-heading {
+            font-size: clamp(2rem, 6vw, 2.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #0F766E, #14B8A6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+          }
+          .form-container {
+            display: flex;
+            gap: 0.75rem;
+            width: 100%;
+            align-items: stretch;
+          }
+          .email-input {
+            flex: 1;
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.2s;
+            background-color: #f8fafc;
+            color: #1e293b;
+          }
+          .email-input:focus {
+            border-color: #0F766E;
+            background-color: #ffffff;
+            box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1);
+          }
+          .submit-btn {
+            padding: 0.875rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            background: linear-gradient(to right, #0F766E, #14B8A6);
+            color: white;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 10px rgba(20, 184, 166, 0.25);
+            white-space: nowrap;
+          }
+          .submit-btn:hover { opacity: 0.95; transform: translateY(-1px); }
+          .submit-btn:active { transform: translateY(1px); }
+          .footer-section {
+            background-color: #F7FAF9;
+            border-top: 1px solid #e2e8f0;
+            padding: 2rem 5%;
+            text-align: center;
+            margin-top: auto;
+            width: 100%;
+          }
+          .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 50%;
+            color: #0F766E;
+            transition: all 0.2s ease;
+            cursor: pointer;
+          }
+          .social-icon:hover {
+            background-color: #0F766E;
+            color: #ffffff;
+            border-color: #0F766E;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(15, 118, 110, 0.2);
+          }
+          
+          /* Mobile Responsiveness */
           @media (max-width: 600px) {
-            footer {
+            .registration-card {
+              padding: 1.75rem 1.25rem;
+            }
+            .form-container {
               flex-direction: column;
-              justify-content: center;
-              text-align: center;
+            }
+            .submit-btn {
+              width: 100%;
+            }
+            .nav-header {
+              padding: 0 1rem;
             }
           }
         `}
