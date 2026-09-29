@@ -270,7 +270,7 @@ export default function App() {
           .submit-btn:hover { opacity: 0.95; transform: translateY(-1px); }
           .submit-btn:active { transform: translateY(1px); }
           .footer-section {
-            background-color: #F7FAF9;
+            background-color: #DDF5EF;
             border-top: 1px solid #e2e8f0;
             padding: 2rem 5%;
             text-align: center;
